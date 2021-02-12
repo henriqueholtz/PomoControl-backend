@@ -9,5 +9,6 @@ namespace PomoControll.Model
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public byte Type{ get; set; } //EnumTypeScope
+        public string Commentary { get; set; }
     }
 }
