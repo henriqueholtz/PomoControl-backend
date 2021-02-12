@@ -1,18 +1,17 @@
-﻿using PomoControl.BLL.Generics;
-using PomoControl.BLL.Interfaces;
+﻿using PomoControl.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace PomoControl.BLL
+namespace PomoControl.DAL
 {
-    public class ScopeBLL : IBaseBLL
+    public class ScopeDAL : IBaseDAL
     {
-        public GenericResult Delete<T>(T entity) where T : class
+        public bool Delete<T>(T entity) where T : class
         {
             throw new NotImplementedException();
         }
 
-        public List<T> GetAll<T>(T entity) where T : class
+        public List<T> GetAll<T>() where T : class
         {
             throw new NotImplementedException();
         }
@@ -22,12 +21,12 @@ namespace PomoControl.BLL
             throw new NotImplementedException();
         }
 
-        public GenericResult Insert<T>(T entity) where T : class
+        public int Insert<T>(T entity) where T : class
         {
             throw new NotImplementedException();
         }
 
-        public GenericResult Update<T>(T entity) where T : class
+        public bool Update<T>(T entity) where T : class
         {
             throw new NotImplementedException();
         }
