@@ -27,7 +27,12 @@ namespace PomoControl.API
             //inject context (connection db)
             services.AddDbContext<PomoContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); //appsettings.json
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                    retry => retry.EnableRetryOnFailure(
+                            maxRetryCount: 2,
+                            maxRetryDelay: TimeSpan.FromSeconds(6),
+                            errorNumbersToAdd: null
+                        ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
             });
         }
 

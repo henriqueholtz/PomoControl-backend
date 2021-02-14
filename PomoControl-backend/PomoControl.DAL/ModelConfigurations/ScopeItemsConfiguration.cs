@@ -10,9 +10,13 @@ namespace PomoControl.DAL.ModelConfigurations
     {
         public void Configure(EntityTypeBuilder<ScopeItem> builder)
         {
-            //DefaultConfigs(builder, nameof(Scope));
+            builder.ToTable("ScopeItems");
+            builder.HasKey(prop => prop.ScopeItemCode);
 
-            
+            builder.Property(p => p.Start).IsRequired();
+            //builder.Property(p => p.End)
+            builder.Property(p => p.Type).HasColumnType(TypeName.BYTE).IsRequired();
+            builder.Property(p => p.Commentary).HasColumnType(TypeName.VARCHAR500);
         }
     }
 }

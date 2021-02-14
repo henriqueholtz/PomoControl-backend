@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomoControl.DAL.ModelConfigurations;
 using PomoControll.Model;
+using System.Linq;
 
 namespace PomoControl.DAL.Data
 {
@@ -15,11 +16,34 @@ namespace PomoControl.DAL.Data
         public DbSet<ScopeItem> ScopeItems { get; set; }
 
 
+
+        private void MapearPropriedadesEsquecidas(ModelBuilder modelBuilder)
+        {
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entity.GetProperties().Where(p => p.ClrType == typeof(string));
+                foreach (var property in properties)
+                {
+                    if (string.IsNullOrEmpty(property.GetColumnType())
+                        && !property.GetMaxLength().HasValue)
+                    {
+                        //property.SetMaxLength();
+                        property.SetColumnType("VARCHAR(100)");
+                    }
+                }
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //from assembly pega automaticamente todas classes que implementam IEntityTypeConfiguration
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PomoContext).Assembly);
+            MapearPropriedadesEsquecidas(modelBuilder);
+
+
             //FluentApi -> ApplyConfiguration
-            modelBuilder.ApplyConfiguration(new ScopeConfiguration());
-            modelBuilder.ApplyConfiguration(new ScopeItemsConfiguration());
+            //modelBuilder.ApplyConfiguration(new ScopeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ScopeItemsConfiguration());
         }
     }
 }
