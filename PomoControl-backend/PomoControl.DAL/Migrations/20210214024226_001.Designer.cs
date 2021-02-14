@@ -10,7 +10,7 @@ using PomoControl.DAL.Data;
 namespace PomoControl.DAL.Migrations
 {
     [DbContext(typeof(PomoContext))]
-    [Migration("20210214023039_001")]
+    [Migration("20210214024226_001")]
     partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,7 +99,7 @@ namespace PomoControl.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("BYTE");
+                        .HasColumnType("TINYINT");
 
                     b.HasKey("ScopeItemCode");
 

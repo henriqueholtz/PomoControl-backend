@@ -15,7 +15,7 @@ namespace PomoControl.DAL.ModelConfigurations
 
             builder.Property(p => p.Start).IsRequired();
             //builder.Property(p => p.End)
-            builder.Property(p => p.Type).HasColumnType(TypeName.BYTE).IsRequired();
+            builder.Property(p => p.Type).HasColumnType(TypeName.TINYINT).IsRequired();
             builder.Property(p => p.Commentary).HasColumnType(TypeName.VARCHAR500);
         }
     }

@@ -43,7 +43,7 @@ namespace PomoControl.DAL.Migrations
                     ScopeCode = table.Column<int>(type: "int", nullable: false),
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Type = table.Column<byte>(type: "BYTE", nullable: false),
+                    Type = table.Column<byte>(type: "TINYINT", nullable: false),
                     Commentary = table.Column<string>(type: "VARCHAR(500)", nullable: true)
                 },
                 constraints: table =>

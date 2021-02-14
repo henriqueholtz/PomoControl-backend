@@ -2,9 +2,9 @@
 {
     class TypeName
     {
-        public const string SMALLINT = "SMALLINT";
+        //public const string SMALLINT = "SMALLINT";
         public const string TINYINT = "TINYINT"; //0 - 255
-        public const string BYTE = "BYTE";
+        //public const string BYTE = "BYTE";
         public const string CODE = "INT";
 
         public const string DATETIME = "DATETIME";

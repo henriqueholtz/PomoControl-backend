@@ -97,7 +97,7 @@ namespace PomoControl.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte>("Type")
-                        .HasColumnType("BYTE");
+                        .HasColumnType("TINYINT");
 
                     b.HasKey("ScopeItemCode");
 
