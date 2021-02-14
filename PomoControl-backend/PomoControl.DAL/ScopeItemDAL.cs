@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PomoControl.DAL
 {
-    class ScopeItemDAL : IBaseDAL
+    public class ScopeItemDAL : IBaseDAL
     {
         public bool Delete<T>(T entity) where T : class
         {

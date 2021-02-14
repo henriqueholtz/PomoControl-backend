@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PomoControll.Model
 {
@@ -20,5 +21,6 @@ namespace PomoControll.Model
         public bool Thursday { get; set; }
         public bool Friday { get; set; }
         public bool Saturday { get; set; }
+        public virtual ICollection<ScopeItem> ScopeItems { get; set; }
     }
 }
