@@ -33,6 +33,9 @@ namespace PomoControl.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddControllers();
+
+            //services.AddAuthentication();
 
             //inject context (connection db)
             services.AddDbContext<PomoContext>(options =>
@@ -46,31 +49,31 @@ namespace PomoControl.API
             });
 
             //Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1",
-                    new Microsoft.OpenApi.Models.OpenApiInfo
-                    {
-                        Title = "PomoControl API",
-                        Version = "v1",
-                        Description = "API PomoControl with ASP.NET Core",
-                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
-                        {
-                            Email = "henrique_holtz@hotmail.com",
-                            Name = "Henrique Holtz",
-                            Url = new Uri("https://github.com/henriqueholtz")
-                        }
-                    });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1",
+            //        new Microsoft.OpenApi.Models.OpenApiInfo
+            //        {
+            //            Title = "PomoControl API",
+            //            Version = "v1",
+            //            Description = "API PomoControl with ASP.NET Core",
+            //            Contact = new Microsoft.OpenApi.Models.OpenApiContact
+            //            {
+            //                Email = "henrique_holtz@hotmail.com",
+            //                Name = "Henrique Holtz",
+            //                Url = new Uri("https://github.com/henriqueholtz")
+            //            }
+            //        });
 
-                string caminhoAplicacao =
-                    PlatformServices.Default.Application.ApplicationBasePath;
-                string nomeAplicacao =
-                    PlatformServices.Default.Application.ApplicationName;
-                string caminhoXmlDoc =
-                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+            //    string caminhoAplicacao =
+            //        PlatformServices.Default.Application.ApplicationBasePath;
+            //    string nomeAplicacao =
+            //        PlatformServices.Default.Application.ApplicationName;
+            //    string caminhoXmlDoc =
+            //        Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
 
-                c.IncludeXmlComments(caminhoXmlDoc);
-            });
+            //    c.IncludeXmlComments(caminhoXmlDoc);
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,6 +93,9 @@ namespace PomoControl.API
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -14,5 +14,10 @@ namespace PomoControl.API.Controllers
         {
             return new string[] { "PomoControl - API", "Created in 02/21" };
         }
+
+        [HttpGet("secure")]
+        [Authorize]
+        //[AllowAnonymous]
+        public string GetAuthorize() => "Authorize!!";
     }
 }
