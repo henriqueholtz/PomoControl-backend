@@ -38,15 +38,15 @@ namespace PomoControl.API
             //services.AddAuthentication();
 
             //inject context (connection db)
-            services.AddDbContext<PomoContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
-                    retry => retry.EnableRetryOnFailure(
-                            maxRetryCount: 2,
-                            maxRetryDelay: TimeSpan.FromSeconds(6),
-                            errorNumbersToAdd: null
-                        ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
-            });
+            //services.AddDbContext<PomoContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+            //        retry => retry.EnableRetryOnFailure(
+            //                maxRetryCount: 2,
+            //                maxRetryDelay: TimeSpan.FromSeconds(6),
+            //                errorNumbersToAdd: null
+            //            ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
+            //});
 
             //Swagger
             //services.AddSwaggerGen(c =>
@@ -80,12 +80,12 @@ namespace PomoControl.API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Ativando middlewares para uso do Swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json",
-                    "PomoControl API");
-            });
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json",
+            //        "PomoControl API");
+            //});
 
             if (env.IsDevelopment())
             {
