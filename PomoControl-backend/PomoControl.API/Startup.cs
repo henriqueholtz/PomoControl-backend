@@ -52,10 +52,10 @@ namespace PomoControl.API
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    //ValidIssuer = "accounts.google.com",
-                    ValidateAudience = false,
-                    //ValidAudience = "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com",
+                    ValidateIssuer = true,
+                    ValidIssuer = "JwtGenerator", //"accounts.google.com",
+                    ValidateAudience = true,
+                    ValidAudience = "Snd0R2VuZXJhdG9y" //"779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com",
                 };
             });
             #endregion
