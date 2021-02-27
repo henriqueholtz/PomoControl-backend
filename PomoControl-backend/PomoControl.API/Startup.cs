@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using PomoControl.DAL.Data;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PomoControl.API
 {
@@ -35,57 +38,83 @@ namespace PomoControl.API
             services.AddMvc();
             services.AddControllers();
 
-            //services.AddAuthentication();
+#region JWT
+            var key = Encoding.ASCII.GetBytes("aGVucmlxdWVlbmNvZGU=");
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => 
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    //ValidIssuer = "accounts.google.com",
+                    ValidateAudience = false,
+                    //ValidAudience = "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com",
+                };
+            });
+            #endregion
 
-            //inject context (connection db)
-            //services.AddDbContext<PomoContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-            //        retry => retry.EnableRetryOnFailure(
-            //                maxRetryCount: 2,
-            //                maxRetryDelay: TimeSpan.FromSeconds(6),
-            //                errorNumbersToAdd: null
-            //            ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
-            //});
 
-            //Swagger
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1",
-            //        new Microsoft.OpenApi.Models.OpenApiInfo
-            //        {
-            //            Title = "PomoControl API",
-            //            Version = "v1",
-            //            Description = "API PomoControl with ASP.NET Core",
-            //            Contact = new Microsoft.OpenApi.Models.OpenApiContact
-            //            {
-            //                Email = "henrique_holtz@hotmail.com",
-            //                Name = "Henrique Holtz",
-            //                Url = new Uri("https://github.com/henriqueholtz")
-            //            }
-            //        });
+            #region DataBase connection
+            services.AddDbContext<PomoContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    retry => retry.EnableRetryOnFailure(
+                            maxRetryCount: 2,
+                            maxRetryDelay: TimeSpan.FromSeconds(6),
+                            errorNumbersToAdd: null
+                        ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
+            });
+            #endregion
 
-            //    string caminhoAplicacao =
-            //        PlatformServices.Default.Application.ApplicationBasePath;
-            //    string nomeAplicacao =
-            //        PlatformServices.Default.Application.ApplicationName;
-            //    string caminhoXmlDoc =
-            //        Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+            #region Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "PomoControl API",
+                        Version = "v1",
+                        Description = "API PomoControl with ASP.NET Core",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                        {
+                            Email = "henrique_holtz@hotmail.com",
+                            Name = "Henrique Holtz",
+                            Url = new Uri("https://github.com/henriqueholtz")
+                        }
+                    });
 
-            //    c.IncludeXmlComments(caminhoXmlDoc);
-            //});
+                string caminhoAplicacao =
+                    PlatformServices.Default.Application.ApplicationBasePath;
+                string nomeAplicacao =
+                    PlatformServices.Default.Application.ApplicationName;
+                string caminhoXmlDoc =
+                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+
+                c.IncludeXmlComments(caminhoXmlDoc);
+            });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Ativando middlewares para uso do Swagger
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json",
-            //        "PomoControl API");
-            //});
+
+            #region Swagger
+           //Ativando middlewares para uso do Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "PomoControl API");
+            });
+            #endregion
 
             if (env.IsDevelopment())
             {

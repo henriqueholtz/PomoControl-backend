@@ -13,17 +13,21 @@ namespace PomoControl.API.Controllers
     {
 
         [HttpGet]
+        [Authorize]
+        //[AllowAnonymous]
+        public string GetAuthorize() => "Authorize!!";
+
+        //[HttpGet]
         //[Authorize]
-        [AllowAnonymous]
-        public object Secure([FromQuery]string accessToken)
-        {
-            //var stream = "[encoded jwt]";
-            var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(accessToken);
-            var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken; 
+        //public object Secure([FromQuery]string accessToken)
+        //{
+        //    //var stream = "[encoded jwt]";
+        //    var handler = new JwtSecurityTokenHandler();
+        //    var jsonToken = handler.ReadToken(accessToken);
+        //    var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken; 
 
 
-            return new { tokenS };
-        }
+        //    return new { tokenS };
+        //}
     }
 }
