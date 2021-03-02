@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace PomoControll.Model
 {
-    public class Scope
+    public class Scope : Base
     {
-        public int Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Steps { get; set; }
@@ -22,5 +21,10 @@ namespace PomoControll.Model
         public bool Friday { get; set; }
         public bool Saturday { get; set; }
         public virtual ICollection<ScopeItem> ScopeItems { get; set; }
+
+        public override bool Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

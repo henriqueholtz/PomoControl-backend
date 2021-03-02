@@ -11,7 +11,7 @@ namespace PomoControl.DAL.ModelConfigurations
         public void Configure(EntityTypeBuilder<ScopeItem> builder)
         {
             builder.ToTable("ScopeItems");
-            builder.HasKey(prop => prop.ScopeItemCode);
+            builder.HasKey(prop => prop.Code);
 
             builder.Property(p => p.Start).IsRequired();
             //builder.Property(p => p.End)
