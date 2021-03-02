@@ -1,4 +1,4 @@
-﻿namespace PomoControl.DAL.Enums
+﻿namespace PomoControl.Infraestructure.Enums
 {
     class TypeName
     {

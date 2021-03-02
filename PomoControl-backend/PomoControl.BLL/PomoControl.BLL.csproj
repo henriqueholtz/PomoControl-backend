@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PomoControl.DAL\PomoControl.DAL.csproj" />
+    <ProjectReference Include="..\PomoControl.DAL\PomoControl.Infraestructure.csproj" />
     <ProjectReference Include="..\PomoControll.BLL\PomoControll.Model.csproj" />
   </ItemGroup>
 

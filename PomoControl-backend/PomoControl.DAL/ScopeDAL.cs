@@ -1,8 +1,8 @@
-﻿using PomoControl.DAL.Interfaces;
+﻿using PomoControl.Infraestructure.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace PomoControl.DAL
+namespace PomoControl.Infraestructure
 {
     public class ScopeDAL : IBaseDAL
     {

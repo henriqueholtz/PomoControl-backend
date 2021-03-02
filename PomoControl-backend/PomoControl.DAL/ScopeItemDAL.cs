@@ -1,9 +1,9 @@
-﻿using PomoControl.DAL.Exceptions;
-using PomoControl.DAL.Interfaces;
+﻿using PomoControl.Infraestructure.Exceptions;
+using PomoControl.Infraestructure.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace PomoControl.DAL
+namespace PomoControl.Infraestructure
 {
     public class ScopeItemDAL : IBaseDAL
     {

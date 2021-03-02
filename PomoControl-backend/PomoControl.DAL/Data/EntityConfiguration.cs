@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PomoControl.DAL.Data
+namespace PomoControl.Infraestructure.Data
 {
     public class EntityConfiguration<TEntity> where TEntity : class
     {

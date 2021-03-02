@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PomoControl.DAL.ModelConfigurations;
+using PomoControl.Infraestructure.ModelConfigurations;
 using PomoControll.Model;
 using System.Linq;
 
-namespace PomoControl.DAL.Data
+namespace PomoControl.Infraestructure.Data
 {
     public class PomoContext : DbContext
     {

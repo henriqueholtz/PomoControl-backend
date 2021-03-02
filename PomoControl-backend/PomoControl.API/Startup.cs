@@ -8,12 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PomoControl.DAL.Data;
+using PomoControl.Infraestructure.Data;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 
 namespace PomoControl.API
 {
@@ -39,7 +40,7 @@ namespace PomoControl.API
             services.AddControllers();
 
 #region JWT
-            var key = Encoding.ASCII.GetBytes("aGVucmlxdWVlbmNvZGU=");
+            var key = Encoding.ASCII.GetBytes("AIzaSyDcT98hoHkMNPIMl5n4BPVPFV0Y9cNwiUE");
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -52,11 +53,18 @@ namespace PomoControl.API
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = true,
-                    ValidIssuer = "JwtGenerator", //"accounts.google.com",
-                    ValidateAudience = true,
-                    ValidAudience = "Snd0R2VuZXJhdG9y" //"779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com",
+                    ValidateIssuer = false,
+                    //ValidateIssuer = true,
+                    //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
+                    ValidateAudience = false,
+                    //ValidateAudience = true,
+                    //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
                 };
+            }).AddGoogle(x =>
+            {
+                x.ClientId = "779353502918-khhi4aa617b0ucnq95ee7tg3r8iltubd.apps.googleusercontent.com";
+                x.ClientSecret = "DVZv27Ie6qZIQpUk7trq3gKl";
+                x.Validate();
             });
             #endregion
 

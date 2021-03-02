@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PomoControl.DAL.Data;
-using PomoControl.DAL.Enums;
+using PomoControl.Infraestructure.Data;
+using PomoControl.Infraestructure.Enums;
 using PomoControll.Model;
 
-namespace PomoControl.DAL.ModelConfigurations
+namespace PomoControl.Infraestructure.ModelConfigurations
 {
     public class ScopeConfiguration : EntityConfiguration<Scope>, IEntityTypeConfiguration<Scope>
     {

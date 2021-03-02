@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PomoControl.DAL.Exceptions
+namespace PomoControl.Infraestructure.Exceptions
 {
     class ExceptionDAL : Exception
     {

@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControll.Model", "PomoC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.BLL", "PomoControl.BLL\PomoControl.BLL.csproj", "{A9D1EFFF-F3B1-4285-B8EB-2B7398AB2852}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.DAL", "PomoControl.DAL\PomoControl.DAL.csproj", "{25D6D176-B2DC-449F-AD2D-00CCB6016A70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.Infraestructure", "PomoControl.DAL\PomoControl.Infraestructure.csproj", "{25D6D176-B2DC-449F-AD2D-00CCB6016A70}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.API", "PomoControl.API\PomoControl.API.csproj", "{5E976EF3-44EF-443F-817B-E4BA042E8EB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomoControl-API", "PomoControl-API\PomoControl-API.csproj", "{1EF433C0-652C-47B7-A6E0-E3600D77A16B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomoControl.DTO", "PomoControl.DTO\PomoControl.DTO.csproj", "{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.DTO", "PomoControl.DTO\PomoControl.DTO.csproj", "{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

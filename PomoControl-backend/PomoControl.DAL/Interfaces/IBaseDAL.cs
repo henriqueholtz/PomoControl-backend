@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PomoControl.DAL.Interfaces
+namespace PomoControl.Infraestructure.Interfaces
 {
     interface IBaseDAL
     {
