@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PomoControl.DAL\PomoControl.Infraestructure.csproj" />
+    <ProjectReference Include="..\PomoControl.Infraestructure\PomoControl.Infraestructure.csproj" />
     <ProjectReference Include="..\PomoControl.DTO\PomoControl.DTO.csproj" />
   </ItemGroup>
 
