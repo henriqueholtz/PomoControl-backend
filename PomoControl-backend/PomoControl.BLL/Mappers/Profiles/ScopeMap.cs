@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using PomoControl.BLL.Dtos;
+using PomoControl.Service.Dtos;
 using PomoControll.Model;
 
-namespace PomoControl.BLL.Mappers.Profiles
+namespace PomoControl.Service.Mappers.Profiles
 {
     class ScopeMap : Profile
     {

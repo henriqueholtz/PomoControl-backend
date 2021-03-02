@@ -2,10 +2,11 @@
 using PomoControl.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace PomoControl.BLL
 {
-    public class ScopeBLL : IBaseBLL
+    class ScopeItemsService : IBaseBLL
     {
         public GenericResult Delete<T>(T entity) where T : class
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PomoControl.BLL.Dtos
+namespace PomoControl.Service.Dtos
 {
     class ScopeDto
     {

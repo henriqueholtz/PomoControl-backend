@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PomoControl.BLL.Exceptions
+namespace PomoControl.Service.Exceptions
 {
     class ExceptionBLL : Exception
     {

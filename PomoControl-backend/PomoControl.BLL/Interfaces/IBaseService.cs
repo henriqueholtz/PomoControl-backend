@@ -1,9 +1,9 @@
-﻿using PomoControl.BLL.Generics;
+﻿using PomoControl.Service.Generics;
 using System.Collections.Generic;
 
-namespace PomoControl.BLL.Interfaces
+namespace PomoControl.Service.Interfaces
 {
-    interface IBaseBLL
+    interface IBaseService
     {
         GenericResult Insert<T>(T entity) where T : class;
         GenericResult Update<T>(T entity) where T : class;

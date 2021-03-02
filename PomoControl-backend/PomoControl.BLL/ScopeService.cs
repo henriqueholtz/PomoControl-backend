@@ -1,12 +1,11 @@
-﻿using PomoControl.BLL.Generics;
-using PomoControl.BLL.Interfaces;
+﻿using PomoControl.Service.Generics;
+using PomoControl.Service.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace PomoControl.BLL
+namespace PomoControl.Service
 {
-    class ScopeItemsBLL : IBaseBLL
+    public class ScopeService : IBaseService
     {
         public GenericResult Delete<T>(T entity) where T : class
         {

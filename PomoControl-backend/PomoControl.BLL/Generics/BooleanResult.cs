@@ -1,4 +1,4 @@
-﻿namespace PomoControl.BLL.Generics
+﻿namespace PomoControl.Service.Generics
 {
     public abstract class BooleanResult
     {

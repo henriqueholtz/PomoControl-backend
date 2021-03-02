@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using PomoControl.BLL.Mappers.Profiles;
+using PomoControl.Service.Mappers.Profiles;
 using System;
 
-namespace PomoControl.BLL.Mappers
+namespace PomoControl.Service.Mappers
 {
     class Mapping
     {

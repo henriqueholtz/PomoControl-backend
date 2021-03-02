@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControll.Model", "PomoControll.BLL\PomoControll.Model.csproj", "{2C4A6109-5F45-40B7-AC72-78947BF1D907}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.BLL", "PomoControl.BLL\PomoControl.BLL.csproj", "{A9D1EFFF-F3B1-4285-B8EB-2B7398AB2852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.Service", "PomoControl.BLL\PomoControl.Service.csproj", "{A9D1EFFF-F3B1-4285-B8EB-2B7398AB2852}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.Infraestructure", "PomoControl.DAL\PomoControl.Infraestructure.csproj", "{25D6D176-B2DC-449F-AD2D-00CCB6016A70}"
 EndProject
