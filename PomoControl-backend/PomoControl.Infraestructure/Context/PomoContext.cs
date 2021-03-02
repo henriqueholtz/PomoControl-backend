@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PomoControl.Infraestructure.ModelConfigurations;
 using PomoControl.Domain;
 using System.Linq;
 

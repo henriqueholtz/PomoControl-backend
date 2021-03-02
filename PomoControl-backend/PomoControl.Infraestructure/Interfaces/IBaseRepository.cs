@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace PomoControl.Infraestructure.Interfaces
 {
-    interface IBaseRepository<T> where T : Base
+    public interface IBaseRepository<T> where T : Base
     {
         Task<T> Insert(T entity);
         Task<T> Update(T entity);
         Task<T> Delete(int code);
 
-        Task<List<T>> GetAll(T entity);
+        Task<List<T>> GetAll();
         Task<T> GetByCode(int code);
     }
 }
