@@ -2,10 +2,8 @@
 using PomoControl.Domain;
 using PomoControl.Infraestructure.Context;
 using PomoControl.Infraestructure.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PomoControl.Infraestructure.Repositories

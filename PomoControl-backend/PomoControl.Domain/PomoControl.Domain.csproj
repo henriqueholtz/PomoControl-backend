@@ -8,4 +8,8 @@
     <PackageReference Include="FluentValidation" Version="9.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PomoControl.Core\PomoControl.Core.csproj" />
+  </ItemGroup>
+
 </Project>

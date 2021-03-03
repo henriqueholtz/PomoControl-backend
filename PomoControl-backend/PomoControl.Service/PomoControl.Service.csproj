@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PomoControl.Domain\PomoControl.Domain.csproj" />
     <ProjectReference Include="..\PomoControl.Infraestructure\PomoControl.Infraestructure.csproj" />
   </ItemGroup>

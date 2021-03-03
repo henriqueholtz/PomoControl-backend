@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PomoControl.Infraestructure.Data;
-using PomoControl.Infraestructure.Enums;
 using PomoControl.Domain;
+using PomoControl.Infraestructure.Enums;
 
-namespace PomoControl.Infraestructure.ModelConfigurations
+namespace PomoControl.Infraestructure.Mappings
 {
-    public class ScopeItemsConfiguration : EntityConfiguration<ScopeItem>, IEntityTypeConfiguration<ScopeItem>
+    public class ScopeItemsMap : IEntityTypeConfiguration<ScopeItem>
     {
         public void Configure(EntityTypeBuilder<ScopeItem> builder)
         {

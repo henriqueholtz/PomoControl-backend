@@ -1,4 +1,5 @@
-﻿using PomoControl.Domain.Validators;
+﻿using PomoControl.Core.Exceptions;
+using PomoControl.Domain.Validators;
 using System;
 using System.Collections.Generic;
 
@@ -57,7 +58,7 @@ namespace PomoControl.Domain
                 {
                     _errors.Add($"{error.ErrorCode.ToString()} - {error.ErrorMessage}");
 
-                    throw new Exception("Some properties are not valid" + _errors[0]);
+                    throw new DomainException("Some properties are not valid" , _errors);
                 }
             }
             return true;

@@ -44,5 +44,10 @@ namespace PomoControl.Infraestructure.Context
             //modelBuilder.ApplyConfiguration(new ScopeConfiguration());
             //modelBuilder.ApplyConfiguration(new ScopeItemsConfiguration());
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(connection string here)
+        //}
     }
 }
