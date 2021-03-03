@@ -17,11 +17,9 @@ namespace PomoControl.Infraestructure.Repositories
         {
             _context = context;
         }
-        public async Task<Scope> SearchByName(string name)
+        public async Task<List<Scope>> SearchByName(string name)
         {
-            var scopes = await _context.Scopes.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToListAsync();
-
-            return scopes.FirstOrDefault();
+            return await _context.Scopes.Where(x => x.Name.ToLower().Contains(name.ToLower())).AsNoTracking().ToListAsync();
         }
     }
 }
