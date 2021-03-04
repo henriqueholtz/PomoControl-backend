@@ -41,8 +41,9 @@ namespace PomoControl.API
             services.AddMvc();
             services.AddControllers();
 
-#region JWT
-            var key = Encoding.ASCII.GetBytes("AIzaSyDcT98hoHkMNPIMl5n4BPVPFV0Y9cNwiUE");
+            #region JWT
+            var secretKey = Configuration["Jwt:SecretKey"];
+            var key = Encoding.ASCII.GetBytes(secretKey);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -55,11 +56,13 @@ namespace PomoControl.API
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    //ValidateIssuer = true,
+                    //ValidateIssuer = false,
+                    ValidateIssuer = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
                     //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
-                    ValidateAudience = false,
-                    //ValidateAudience = true,
+                    //ValidateAudience = false,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Audiences"],
                     //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
                 };
             }).AddGoogle(x =>
@@ -84,69 +87,68 @@ namespace PomoControl.API
             #endregion
 
             #region Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "PomoControl API",
-                    Version = "v1",
-                    Description = "API PomoControl with ASP.NET Core",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Henrique Holtz",
-                        Email = "henrique_holtz@hotmail.com",
-                        Url = new Uri("https://henriqueholtz.github.io/")
-                    },
-                });
-
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Por favor utilize Bearer <TOKEN>",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    new string[] { }
-                }
-                });
-                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-            });
-
             //services.AddSwaggerGen(c =>
             //{
-            //    c.SwaggerDoc("v1",
-            //        new Microsoft.OpenApi.Models.OpenApiInfo
+            //    c.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Title = "PomoControl API",
+            //        Version = "v1",
+            //        Description = "API PomoControl with ASP.NET Core",
+            //        Contact = new OpenApiContact
             //        {
-            //            Title = "PomoControl API",
-            //            Version = "v1",
-            //            Description = "API PomoControl with ASP.NET Core",
-            //            Contact = new Microsoft.OpenApi.Models.OpenApiContact
+            //            Name = "Henrique Holtz",
+            //            Email = "henrique_holtz@hotmail.com",
+            //            Url = new Uri("https://henriqueholtz.github.io/")
+            //        },
+            //    });
+
+            //    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            //    {
+            //        In = ParameterLocation.Header,
+            //        Description = "Por favor utilize Bearer <TOKEN>",
+            //        Name = "Authorization",
+            //        Type = SecuritySchemeType.ApiKey
+            //    });
+            //    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+            //    {
+            //        new OpenApiSecurityScheme
+            //        {
+            //            Reference = new OpenApiReference
             //            {
-            //                Email = "henrique_holtz@hotmail.com",
-            //                Name = "Henrique Holtz",
-            //                Url = new Uri("https://github.com/henriqueholtz")
+            //                Type = ReferenceType.SecurityScheme,
+            //                Id = "Bearer"
             //            }
-            //        });
-
-            //    string caminhoAplicacao =
-            //        PlatformServices.Default.Application.ApplicationBasePath;
-            //    string nomeAplicacao =
-            //        PlatformServices.Default.Application.ApplicationName;
-            //    string caminhoXmlDoc =
-            //        Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
-
-            //    c.IncludeXmlComments(caminhoXmlDoc);
+            //        },
+            //        new string[] { }
+            //    }
+            //    });
             //});
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "PomoControl API",
+                        Version = "v1",
+                        Description = "API PomoControl with ASP.NET Core",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                        {
+                            Email = "henrique_holtz@hotmail.com",
+                            Name = "Henrique Holtz",
+                            Url = new Uri("https://github.com/henriqueholtz")
+                        }
+                    });
+
+                string caminhoAplicacao =
+                    PlatformServices.Default.Application.ApplicationBasePath;
+                string nomeAplicacao =
+                    PlatformServices.Default.Application.ApplicationName;
+                string caminhoXmlDoc =
+                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+
+                c.IncludeXmlComments(caminhoXmlDoc);
+            });
             #endregion
         }
 
@@ -156,12 +158,12 @@ namespace PomoControl.API
 
             #region Swagger
             //Ativando middlewares para uso do Swagger
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json",
-            //        "PomoControl API");
-            //});
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "PomoControl API");
+            });
             #endregion
 
             if (env.IsDevelopment())
@@ -179,6 +181,7 @@ namespace PomoControl.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

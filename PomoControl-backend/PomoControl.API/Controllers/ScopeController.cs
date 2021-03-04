@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PomoControl.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ScopeController : PomoController
     {
@@ -25,10 +25,9 @@ namespace PomoControl.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
         [Route("/Create")]
+        [HttpPost]
         //[Authorize]
-        //[ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> Create([FromBody] CreateScopeViewModel viewModel)
         {
             try

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PomoControl.Core\PomoControl.Core.csproj" />
     <ProjectReference Include="..\PomoControl.Domain\PomoControl.Domain.csproj" />
   </ItemGroup>
 

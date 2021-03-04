@@ -3,6 +3,7 @@ using PomoControl.Core;
 
 namespace PomoControl.API.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class PomoController : ControllerBase
     {
         private const string HeaderSourceInfo = "PomoControl - API";

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PomoControl.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SecureController : PomoController
     {
@@ -16,6 +16,12 @@ namespace PomoControl.API.Controllers
         [Authorize]
         //[AllowAnonymous]
         public string GetAuthorize() => "Authorize!!";
+
+        [HttpPost("/post")]
+        //[Route("/post")]
+        [Authorize]
+        //[AllowAnonymous]
+        public string GetAuthorizePost() => "Authorize POST!!";
 
         //[HttpGet]
         //[Authorize]

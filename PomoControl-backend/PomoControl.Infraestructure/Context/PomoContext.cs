@@ -13,6 +13,7 @@ namespace PomoControl.Infraestructure.Context
 
         public DbSet<Scope> Scopes { get; set; }
         public DbSet<ScopeItem> ScopeItems { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
 

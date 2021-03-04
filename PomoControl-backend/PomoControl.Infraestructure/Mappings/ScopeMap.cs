@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PomoControl.Domain;
-using PomoControl.Infraestructure.Enums;
+using PomoControl.Core.Enums.SQL;
 
 namespace PomoControl.Infraestructure.Mappings
 {
