@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.Infraestructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.API", "PomoControl.API\PomoControl.API.csproj", "{5E976EF3-44EF-443F-817B-E4BA042E8EB0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.DTO", "PomoControl.DTO\PomoControl.DTO.csproj", "{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomoControl.Core", "PomoControl.Core\PomoControl.Core.csproj", "{F3AABB7B-D7B6-420F-9AD0-F87681B4C99F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PomoControl.Core", "PomoControl.Core\PomoControl.Core.csproj", "{F3AABB7B-D7B6-420F-9AD0-F87681B4C99F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{5E976EF3-44EF-443F-817B-E4BA042E8EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E976EF3-44EF-443F-817B-E4BA042E8EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E976EF3-44EF-443F-817B-E4BA042E8EB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B81DE3DB-B46B-41CB-B5D5-560FE56406CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3AABB7B-D7B6-420F-9AD0-F87681B4C99F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3AABB7B-D7B6-420F-9AD0-F87681B4C99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3AABB7B-D7B6-420F-9AD0-F87681B4C99F}.Release|Any CPU.ActiveCfg = Release|Any CPU

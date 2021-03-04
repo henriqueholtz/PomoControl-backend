@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PomoControl.Infraestructure\PomoControl.Infraestructure.csproj" />
-    <ProjectReference Include="..\PomoControl.DTO\PomoControl.DTO.csproj" />
+    <ProjectReference Include="..\PomoControl.Service\PomoControl.Service.csproj" />
   </ItemGroup>
 
 </Project>

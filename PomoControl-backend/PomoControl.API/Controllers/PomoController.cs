@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PomoControl.DTO.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using PomoControl.Core;
 
 namespace PomoControl.API.Controllers
 {
@@ -11,9 +7,7 @@ namespace PomoControl.API.Controllers
     {
         private const string HeaderSourceInfo = "PomoControl - API";
         public PomoController()
-        {
-
-        }
+        { }
 
         public OkObjectResult Ok<T>(ResponseDTO<T> dto)
         {
@@ -25,13 +19,13 @@ namespace PomoControl.API.Controllers
             Response.Headers.Add(HeaderSourceInfo, dto.SourceResponseAsString);
             return base.Created(url, dto.Data);
         }
-        public CreatedResult Created(string url, ResponseDTO dto)
+        public CreatedResult Created(string url, Response dto)
         {
             Response.Headers.Add(HeaderSourceInfo, dto.SourceResponseAsString);
             return base.Created(url, dto);
         }
 
-        public NoContentResult NoContent(ResponseDTO dto)
+        public NoContentResult NoContent(Response dto)
         {
             Response.Headers.Add(HeaderSourceInfo, dto.SourceResponseAsString);
             return base.NoContent();

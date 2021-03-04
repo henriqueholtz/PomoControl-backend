@@ -13,6 +13,7 @@ namespace PomoControl.Domain.Validators
                 .NotNull()
                 .WithMessage("This entity cannot be null.");
 
+            //Name
             RuleFor(x => x.Name)
                 .NotNull()
                 .WithMessage("The Name cannot be null.")
@@ -25,6 +26,11 @@ namespace PomoControl.Domain.Validators
 
                 .MaximumLength(75)
                 .WithMessage("The maximum length for Name is 75 characters.");
+
+            //Description
+
+
+            //UserCode
         }
     }
 }

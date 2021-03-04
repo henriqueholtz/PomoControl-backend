@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using PomoControl.Infraestructure.Context;
+using Microsoft.OpenApi.Models;
+using System.Linq;
 
 namespace PomoControl.API
 {
@@ -84,29 +86,67 @@ namespace PomoControl.API
             #region Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1",
-                    new Microsoft.OpenApi.Models.OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "PomoControl API",
+                    Version = "v1",
+                    Description = "API PomoControl with ASP.NET Core",
+                    Contact = new OpenApiContact
                     {
-                        Title = "PomoControl API",
-                        Version = "v1",
-                        Description = "API PomoControl with ASP.NET Core",
-                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                        Name = "Henrique Holtz",
+                        Email = "henrique_holtz@hotmail.com",
+                        Url = new Uri("https://henriqueholtz.github.io/")
+                    },
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Por favor utilize Bearer <TOKEN>",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
                         {
-                            Email = "henrique_holtz@hotmail.com",
-                            Name = "Henrique Holtz",
-                            Url = new Uri("https://github.com/henriqueholtz")
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
                         }
-                    });
-
-                string caminhoAplicacao =
-                    PlatformServices.Default.Application.ApplicationBasePath;
-                string nomeAplicacao =
-                    PlatformServices.Default.Application.ApplicationName;
-                string caminhoXmlDoc =
-                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
-
-                c.IncludeXmlComments(caminhoXmlDoc);
+                    },
+                    new string[] { }
+                }
+                });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1",
+            //        new Microsoft.OpenApi.Models.OpenApiInfo
+            //        {
+            //            Title = "PomoControl API",
+            //            Version = "v1",
+            //            Description = "API PomoControl with ASP.NET Core",
+            //            Contact = new Microsoft.OpenApi.Models.OpenApiContact
+            //            {
+            //                Email = "henrique_holtz@hotmail.com",
+            //                Name = "Henrique Holtz",
+            //                Url = new Uri("https://github.com/henriqueholtz")
+            //            }
+            //        });
+
+            //    string caminhoAplicacao =
+            //        PlatformServices.Default.Application.ApplicationBasePath;
+            //    string nomeAplicacao =
+            //        PlatformServices.Default.Application.ApplicationName;
+            //    string caminhoXmlDoc =
+            //        Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+
+            //    c.IncludeXmlComments(caminhoXmlDoc);
+            //});
             #endregion
         }
 
@@ -115,18 +155,20 @@ namespace PomoControl.API
         {
 
             #region Swagger
-           //Ativando middlewares para uso do Swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json",
-                    "PomoControl API");
-            });
+            //Ativando middlewares para uso do Swagger
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json",
+            //        "PomoControl API");
+            //});
             #endregion
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PomoControl API"));
             }
 
             app.UseRouting();

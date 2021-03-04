@@ -45,6 +45,8 @@ namespace PomoControl.Domain
             Saturday = saturday;
             ScopeItems = scopeItems;
             _errors = new List<string>();
+
+            Validate();
         }
 
         public override bool Validate()

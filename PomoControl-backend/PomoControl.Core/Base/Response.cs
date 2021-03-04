@@ -1,51 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace PomoControl.DTO.Base
+namespace PomoControl.Core
 {
-    public class ResponseDTO
+    public class Response
     {
         public List<string> SourceResponseTime { get; set; }
         public string SourceResponseAsString => SourceResponseTime != null && SourceResponseTime.Count > 0 ? string.Join('|', SourceResponseTime) : "";
-
-        public ResponseDTO(List<string> sourceResponseTime = null)
+        public Response(List<string> sourceResponseTime = null)
         {
             SourceResponseTime = sourceResponseTime ?? new List<string>();
         }
-
-        public ResponseDTO()
+        public Response()
         {
             SourceResponseTime = new List<string>();
         }
 
-        public ResponseDTO AddResponseTime(string endpoint, long time)
+        public Response AddResponseTime(string endpoint, long time)
         {
-            AddResponseTime(endpoint, time);
+            SourceResponseTime.Add($"{endpoint}({time}ms)");
             return this;
         }
-        public ResponseDTO ConcatResponseTime(List<string> sourceResponseTime)
+
+        public Response ConcatResponseTime(List<string> sourceReponseTime)
         {
-            SourceResponseTime.AddRange(sourceResponseTime);
+            SourceResponseTime.AddRange(sourceReponseTime);
             return this;
         }
     }
 
-    public class ResponseDTO<T> : ResponseDTO
+    public class ResponseDTO<T> : Response
     {
         public T Data { get; set; }
+        public string Message { get; set; }
+        public bool Success { get; set; }
         public ResponseDTO(T data, List<string> sourceResponseTime = null) : base(sourceResponseTime)
         {
             Data = data;
         }
         public ResponseDTO(List<string> sourceResponseTime = null) : base(sourceResponseTime)
-        {
-
-        }
+        { }
         public ResponseDTO() : base()
-        {
-
-        }
+        { }
 
         public new ResponseDTO<T> AddResponseTime(string endpoint, long time)
         {
