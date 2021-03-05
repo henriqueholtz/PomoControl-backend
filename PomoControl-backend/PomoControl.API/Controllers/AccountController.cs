@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomoControl.API.ViewModels.Account;
 using PomoControl.Core.Exceptions;
+using PomoControl.Service.ViewModels.Account;
 using System;
 using System.Threading.Tasks;
 

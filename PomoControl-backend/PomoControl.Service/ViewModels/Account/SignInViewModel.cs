@@ -1,7 +1,7 @@
 ﻿using PomoControl.Core.Enums.Messages;
 using System.ComponentModel.DataAnnotations;
 
-namespace PomoControl.API.ViewModels.Account
+namespace PomoControl.Service.ViewModels.Account
 {
     public class SignInViewModel
     {

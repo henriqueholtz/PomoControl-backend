@@ -13,12 +13,14 @@ namespace PomoControl.Service.Services
         private readonly IUserRepository _userRepository;
         public async Task<ResponseDTO> SignIn(AccountDTO accountDTO)
         {
+            //verify if exist user with this email
             var user = await _userRepository.GetByEmail(accountDTO.Email);
             throw new NotImplementedException();
         }
 
         public async Task<ResponseDTO> SignUp(AccountDTO accountDTO)
         {
+            //verify if exist user with this email
             var user = await _userRepository.GetByEmail(accountDTO.Email);
             throw new NotImplementedException();
         }

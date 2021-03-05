@@ -6,7 +6,7 @@ namespace PomoControl.Infraestructure.Interfaces
 {
     public interface IBaseRepository<T> where T : Base
     {
-        Task<T> Insert(T entity);
+        Task<T> Create(T entity);
         Task<T> Update(T entity);
         Task<T> Delete(int code);
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PomoControl.API.ViewModels.ScopeItem
+namespace PomoControl.Service.ViewModels.ScopeItem
 {
     public class CreateScopeItemViewModel
     {

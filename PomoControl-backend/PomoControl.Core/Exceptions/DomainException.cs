@@ -12,8 +12,8 @@ namespace PomoControl.Core.Exceptions
             _errors = errors;
         }
         public DomainException(string message) : base(message)
-        { }
+        { /* Gravar logs aqui */ }
         public DomainException(string message, Exception innerException) : base(message, innerException)
-        { }
+        { /* Gravar logs aqui */ }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using PomoControl.Core.Enums.Messages;
 using System.ComponentModel.DataAnnotations;
 
-namespace PomoControl.API.ViewModels.Account
+namespace PomoControl.Service.ViewModels.User
 {
-    public class SignUpViewModel
+    public class CreateUserViewModel 
     {
         [Required(ErrorMessage = ErrorMessagesStatic.Required)]
         [MinLength(2, ErrorMessage = "The minimum length for Name is 2 characters.")]

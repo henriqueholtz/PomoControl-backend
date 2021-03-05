@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomoControl.API.ViewModels.Scope;
 using PomoControl.Core;
 using PomoControl.Core.Exceptions;
 using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
+using PomoControl.Service.ViewModels.Scope;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -46,7 +46,7 @@ namespace PomoControl.Infraestructure.Repositories
             return list.FirstOrDefault();
         }
 
-        public virtual async Task<T> Insert(T entity)
+        public virtual async Task<T> Create(T entity)
         {
             _context.Add(entity);
             await _context.SaveChangesAsync();
