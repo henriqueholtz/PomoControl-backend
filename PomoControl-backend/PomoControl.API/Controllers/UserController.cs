@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PomoControl.API.ViewModels.User;
 using PomoControl.Core.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PomoControl.API.Controllers
@@ -13,12 +12,13 @@ namespace PomoControl.API.Controllers
     public class UserController : PomoController
     {
         [HttpPost]
-        public async Task<IActionResult> Create()
+        [AllowAnonymous]
+        public async Task<IActionResult> Create([FromBody] CreateUserViewModel user )
         {
             try
             {
 
-                return Ok();
+                return Ok(user);
             }
             catch(DomainException ex)
             {

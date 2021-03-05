@@ -31,6 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PomoControl.Core\PomoControl.Core.csproj" />
+    <ProjectReference Include="..\PomoControl.Domain\PomoControl.Domain.csproj" />
     <ProjectReference Include="..\PomoControl.Infraestructure\PomoControl.Infraestructure.csproj" />
     <ProjectReference Include="..\PomoControl.Service\PomoControl.Service.csproj" />
   </ItemGroup>

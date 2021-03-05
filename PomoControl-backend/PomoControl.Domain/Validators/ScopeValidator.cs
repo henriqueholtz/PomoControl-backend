@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using PomoControl.Core.Enums.Messages;
 
 namespace PomoControl.Domain.Validators
 {
@@ -6,26 +7,28 @@ namespace PomoControl.Domain.Validators
     {
         public ScopeValidator()
         {
+            var Scope = new ErrorMessages("Scope");
             RuleFor(x => x)
                 .NotEmpty()
-                .WithMessage("This entity cannot be empty.")
+                .WithMessage(Scope.Empty)
 
                 .NotNull()
-                .WithMessage("This entity cannot be null.");
+                .WithMessage(Scope.Null);
 
             //Name
+            var Name = new ErrorMessages("Name");
             RuleFor(x => x.Name)
                 .NotNull()
-                .WithMessage("The Name cannot be null.")
+                .WithMessage(Name.Null)
 
                 .NotEmpty()
-                .WithMessage("The Name cannot be empty.")
+                .WithMessage(Name.EmptyMethod())
 
                 .MinimumLength(3)
-                .WithMessage("The minimum length for Name is 3 characters.")
+                .WithMessage(Name.MaximumLength(3))
 
                 .MaximumLength(75)
-                .WithMessage("The maximum length for Name is 75 characters.");
+                .WithMessage(Name.MaximumLength(75));
 
             //Description
 

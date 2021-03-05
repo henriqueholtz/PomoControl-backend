@@ -3,7 +3,6 @@ using PomoControl.Infraestructure.Interfaces;
 using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PomoControl.Services

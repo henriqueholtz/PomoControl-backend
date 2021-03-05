@@ -1,8 +1,6 @@
 ﻿using PomoControl.Core.Exceptions;
 using PomoControl.Domain.Validators;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PomoControl.Domain
 {
@@ -17,7 +15,16 @@ namespace PomoControl.Domain
         public User()
         { }
 
+        public User(string email, string password, string passwordVerify, bool active)
+        {
+            Email = email;
+            Password = password;
+            PasswordVerify = passwordVerify;
+            Active = active;
 
+            _errors = new List<string>();
+            Validate();
+        }
 
         public override bool Validate()
         {
