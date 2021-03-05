@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PomoControl.Services
+namespace PomoControl.Service.Services
 {
-    public class ScopeItemsService 
+    public class ScopeItemService 
     {
        
     }

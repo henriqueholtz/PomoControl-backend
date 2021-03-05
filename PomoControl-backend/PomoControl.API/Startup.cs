@@ -17,6 +17,15 @@ using System.Collections.Generic;
 using PomoControl.Infraestructure.Context;
 using Microsoft.OpenApi.Models;
 using System.Linq;
+using PomoControl.Service.Interfaces;
+using PomoControl.Service.Services;
+using PomoControl.Infraestructure.Repositories;
+using PomoControl.Infraestructure.Interfaces;
+using AutoMapper;
+using PomoControl.Domain;
+using PomoControl.Service.DTO;
+using PomoControl.Service.ViewModels.User;
+using PomoControl.Service.ViewModels.Account;
 
 namespace PomoControl.API
 {
@@ -40,6 +49,37 @@ namespace PomoControl.API
         {
             services.AddMvc();
             services.AddControllers();
+
+            #region AutoMapper and your DI
+            var autoMapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<User, UserDTO>().ReverseMap();
+                cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
+                cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
+                cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
+                //cfg.CreateMap<User, UserDTO>().ReverseMap();
+            });
+
+            services.AddSingleton(autoMapperConfig.CreateMapper());
+
+            #endregion
+
+            #region Dependency Injection
+
+
+            //services.AddTransient<>(); //It starts a instance per use
+            //services.AddSingleton<>(); // It starts a single instance per application
+            services.AddScoped<IUserService, UserService>(); //It starts a single instance per request
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IScopeService, ScopeService>();
+            services.AddScoped<IScopeRepository, ScopeRepository>();
+
+            services.AddScoped<IAccountService, AccountService>();
+            //services.AddScoped<IAccountRepository, AccountRepository>();
+
+            //services.AddScoped<IScopeItemService, ScopeItemService>();
+            #endregion
 
             #region JWT
             var secretKey = Configuration["Jwt:SecretKey"];

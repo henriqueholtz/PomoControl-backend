@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PomoControl.Services
+namespace PomoControl.Service.Services
 {
     public class ScopeService : IScopeService
     {

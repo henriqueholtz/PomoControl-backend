@@ -12,7 +12,6 @@ namespace PomoControl.API.Controllers
     public class AccountController : PomoController
     {
         [HttpPost]
-        //[HttpPost("api/Account/SignUp")]
         [Route("SignUp")]
         [Authorize]
         public async Task<IActionResult> SignUp([FromBody] SignUpViewModel viewModel)
@@ -32,7 +31,9 @@ namespace PomoControl.API.Controllers
         }
 
 
-        [HttpPost("api/Account/SignIn")]
+        //[HttpPost("api/Account/SignIn")]
+        [HttpPost]
+        [Route("SignIn")]
         [Authorize]
         public async Task<IActionResult> SignIn([FromBody] SignInViewModel viewModel)
         {
