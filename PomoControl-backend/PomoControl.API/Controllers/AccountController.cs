@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace PomoControl.API.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : PomoController
     {
-        [HttpPost("api/Account/SignUp")]
+        [HttpPost]
+        //[HttpPost("api/Account/SignUp")]
+        [Route("SignUp")]
         [Authorize]
         public async Task<IActionResult> SignUp([FromBody] SignUpViewModel viewModel)
         {

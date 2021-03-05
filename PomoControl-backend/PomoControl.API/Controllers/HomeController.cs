@@ -12,7 +12,7 @@ namespace PomoControl.API.Controllers
         [AllowAnonymous]
         public IEnumerable<string> GET()
         {
-            return new string[] { "PomoControl - API", "Created in 02/21" };
+            return new string[] { "PomoControl - API", "Created in 02/21", "by: Henrique Holtz" };
         }
 
     }
