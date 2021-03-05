@@ -1,5 +1,6 @@
 ﻿using PomoControl.Core.Exceptions;
 using PomoControl.Domain.Validators;
+using System;
 using System.Collections.Generic;
 
 namespace PomoControl.Domain
@@ -11,6 +12,7 @@ namespace PomoControl.Domain
         public string Password { get; set; }
         public string PasswordVerify { get; set; }
         public bool Active { get; set; }
+        public DateTime RegisteredDate { get; set; }
 
         public User()
         { }

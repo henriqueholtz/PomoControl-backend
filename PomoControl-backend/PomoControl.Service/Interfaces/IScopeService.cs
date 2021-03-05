@@ -1,7 +1,5 @@
 ﻿using PomoControl.Service.DTO;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PomoControl.Service.Interfaces
@@ -12,6 +10,6 @@ namespace PomoControl.Service.Interfaces
         Task<ScopeDTO> Update(ScopeDTO scopeDTO);
         Task Remove(int code);
         Task<ScopeDTO> Get(int code);
-        Task<ScopeDTO> SearchByName(string name);
+        Task<List<ScopeDTO>> SearchByName(string name);
     }
 }

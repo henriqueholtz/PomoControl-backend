@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PomoControl.Infraestructure.Context;
 
 namespace PomoControl.Infraestructure.Migrations
 {
     [DbContext(typeof(PomoContext))]
-    partial class PomoContextModelSnapshot : ModelSnapshot
+    [Migration("20210305023940_004")]
+    partial class _004
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

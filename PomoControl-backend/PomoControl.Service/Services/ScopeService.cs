@@ -3,6 +3,7 @@ using PomoControl.Infraestructure.Interfaces;
 using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PomoControl.Services
@@ -33,7 +34,7 @@ namespace PomoControl.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ScopeDTO> SearchByName(string name)
+        public async Task<List<ScopeDTO>> SearchByName(string name)
         {
             throw new NotImplementedException();
         }

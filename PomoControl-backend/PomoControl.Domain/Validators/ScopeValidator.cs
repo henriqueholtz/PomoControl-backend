@@ -31,6 +31,7 @@ namespace PomoControl.Domain.Validators
                 .WithMessage(Name.MaximumLength(75));
 
             //Description
+            var Description = new ErrorMessages("Description");
 
 
             //UserCode
