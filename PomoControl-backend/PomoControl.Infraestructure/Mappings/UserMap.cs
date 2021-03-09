@@ -17,7 +17,7 @@ namespace PomoControl.Infraestructure.Mappings
             builder.Property(p => p.PasswordVerify).HasColumnType(TypeName.VARCHAR500).IsRequired();
             builder.Property(p => p.Active).HasColumnType(TypeName.BIT).IsRequired();
             builder.Property(p => p.RegisteredDate).HasColumnType(TypeName.DATETIME).IsRequired();
-            builder.Ignore(p => p.Erros);
+            builder.Ignore(p => p.Errors);
         }
     }
 }

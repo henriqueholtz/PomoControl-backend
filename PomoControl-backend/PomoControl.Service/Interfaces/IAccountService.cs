@@ -1,14 +1,12 @@
 ﻿using PomoControl.Service.DTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PomoControl.Service.ViewModels.Account;
 using System.Threading.Tasks;
 
 namespace PomoControl.Service.Interfaces
 {
     public interface IAccountService
     {
-        Task<ResponseDTO> SignIn(AccountDTO accountDTO);
-        Task<ResponseDTO> SignUp(AccountDTO accountDTO);
+        Task<ResponseDTO> SignIn(SignInViewModel viewModel);
+        Task<ResponseDTO> SignUp(SignUpViewModel viewModel);
     }
 }

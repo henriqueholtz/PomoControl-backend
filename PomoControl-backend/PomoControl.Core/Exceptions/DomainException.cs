@@ -5,8 +5,10 @@ namespace PomoControl.Core.Exceptions
 {
     public class DomainException : Exception
     {
-        internal List<string> _errors;
-        public IReadOnlyCollection<string> Errors => _errors;
+        internal List<string> _errors = new List<string>();
+        public IReadOnlyList<string> Errors => _errors;
+        public DomainException()
+        { /* Gravar logs aqui */ }
         public DomainException(string message, List<string> errors) : base(message)
         {
             _errors = errors;

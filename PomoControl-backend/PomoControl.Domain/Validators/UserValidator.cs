@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using PomoControl.Core.Enums.Messages;
+using PomoControl.Core.Helpers;
+using System;
 
 namespace PomoControl.Domain.Validators
 {
@@ -10,16 +12,16 @@ namespace PomoControl.Domain.Validators
             var User = new ErrorMessages("User");
             RuleFor(x => x)
                 .NotEmpty()
-                .WithMessage(User.Empty)
+                .WithMessage(User.NotEmpty)
 
                 .NotNull()
-                .WithMessage(User.Null);
+                .WithMessage(User.NotNull);
 
             //Name
             var Name = new ErrorMessages("Name");
             RuleFor(x => x.Name)
                 .NotNull()
-                .WithMessage(Name.Null)
+                .WithMessage(Name.NotNull)
 
                 .NotEmpty()
                 .WithMessage(Name.EmptyMethod())
@@ -32,10 +34,68 @@ namespace PomoControl.Domain.Validators
 
             //Email
             var Email = new ErrorMessages("Email");
+            RuleFor(x => x.Email)
+                .NotNull()
+                .WithMessage(Email.NotNull)
+
+                .NotEmpty()
+                .WithMessage(Email.NotEmpty)
+
+                .MinimumLength(10)
+                .WithMessage(Email.MinimumLength(10))
+
+                .MaximumLength(180)
+                .WithMessage(Email.MaximumLength(180))
+
+                .Matches(HelperRegex.Email)
+                .WithMessage(Email.NotValid);
 
             //Password
+            var Password = new ErrorMessages("Password");
+            RuleFor(x => x.Password)
+                .NotNull()
+                .WithMessage(Password.NotNull)
+
+                .NotEmpty()
+                .WithMessage(Password.NotEmpty)
+
+                .MinimumLength(8)
+                .WithMessage(Password.MinimumLength(8))
+
+                .MaximumLength(80)
+                .WithMessage(Password.MaximumLength(80))
+
+                .Matches(HelperRegex.HasLetter)
+                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ")
+
+                .Matches(HelperRegex.HasNumber)
+                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ")
+
+                .Equal(y => y.PasswordVerify)
+                .WithMessage("Password and Password Verify are different.");
+
+
 
             //PasswordVerify
+            var PasswordVerify = new ErrorMessages("Password Verify");
+            RuleFor(x => x.Password)
+                .NotNull()
+                .WithMessage(PasswordVerify.NotNull)
+
+                .NotEmpty()
+                .WithMessage(PasswordVerify.NotEmpty)
+
+                .MinimumLength(8)
+                .WithMessage(PasswordVerify.MinimumLength(8))
+
+                .MaximumLength(80)
+                .WithMessage(PasswordVerify.MaximumLength(80))
+
+                .Matches(HelperRegex.HasLetter)
+                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ")
+
+                .Matches(HelperRegex.HasNumber)
+                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ");
 
             //Active
         }

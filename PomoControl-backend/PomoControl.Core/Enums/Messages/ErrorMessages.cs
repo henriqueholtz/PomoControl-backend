@@ -44,9 +44,10 @@ namespace PomoControl.Core.Enums.Messages
         {
             Property = property;
         }
-        public string Empty { get { return $"{Property} don't can is Empty"; } }
-        public string Null { get { return $"{Property} don't can is Null"; } }
-        public string Requerid { get { return $"{Property} is Requerid."; } }
+        public string NotEmpty { get { return $"{Property} don't can is Empty!"; } }
+        public string NotNull { get { return $"{Property} don't can is Null!"; } }
+        public string IsRequerid { get { return $"{Property} is Requerid!"; } }
+        public string NotValid { get { return $"{Property} don't is valid!"; } }
 
 
         //With methods

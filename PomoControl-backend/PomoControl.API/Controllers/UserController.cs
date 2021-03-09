@@ -17,8 +17,8 @@ namespace PomoControl.API.Controllers
         {
             try
             {
-
-                return Ok(user);
+                //var response
+                return StatusCode(501, user);
             }
             catch(DomainException ex)
             {

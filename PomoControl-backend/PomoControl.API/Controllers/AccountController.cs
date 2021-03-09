@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PomoControl.API.Utilities;
 using PomoControl.Core.Exceptions;
+using PomoControl.Service.DTO;
+using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.Account;
 using System;
 using System.Threading.Tasks;
@@ -11,27 +14,12 @@ namespace PomoControl.API.Controllers
     [ApiController]
     public class AccountController : PomoController
     {
-        [HttpPost]
-        [Route("SignUp")]
-        [Authorize]
-        public async Task<IActionResult> SignUp([FromBody] SignUpViewModel viewModel)
+        private readonly IAccountService _accountService;
+        public AccountController(IAccountService accountService)
         {
-            try
-            {
-                return StatusCode(501, viewModel);
-            }
-            catch (DomainException ex)
-            {
-                return BadRequest(ex);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            _accountService = accountService;
         }
 
-
-        //[HttpPost("api/Account/SignIn")]
         [HttpPost]
         [Route("SignIn")]
         [Authorize]
@@ -39,9 +27,19 @@ namespace PomoControl.API.Controllers
         {
             try
             {
-                return StatusCode(501, viewModel);
+                var response = await _accountService.SignIn(viewModel);
+                if (response.Success)
+                {
+                    //Add Bearer Token in header of response ?
+                    return StatusCode(200, response);
+                }
+                return StatusCode(401, response);
             }
             catch (DomainException ex)
+            {
+                return BadRequest(ex);
+            }
+            catch(ServiceException ex)
             {
                 return BadRequest(ex);
             }
@@ -50,5 +48,33 @@ namespace PomoControl.API.Controllers
                 return BadRequest(ex);
             }
         }
+
+        [HttpPost]
+        [Route("SignUp")]
+        [Authorize]
+        public async Task<IActionResult> SignUp([FromBody] SignUpViewModel viewModel)
+        {
+            try
+            {
+                var response = await _accountService.SignUp(viewModel);
+
+                //Add Bearer Token in header of response?
+
+                return StatusCode(response.StatusCode, response);
+            }
+            catch (DomainException ex)
+            {
+                return BadRequest(Responses.DomainErrorMessage(ex.Message, ex.Errors));
+            }
+            catch (RepositoryException ex)
+            {
+                return StatusCode(500, $"Repository Exception : {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, Responses.ApplicationErrorMessage());
+            }
+        }
+
     }
 }

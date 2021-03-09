@@ -10,16 +10,16 @@ namespace PomoControl.Domain.Validators
             var Scope = new ErrorMessages("Scope");
             RuleFor(x => x)
                 .NotEmpty()
-                .WithMessage(Scope.Empty)
+                .WithMessage(Scope.NotEmpty)
 
                 .NotNull()
-                .WithMessage(Scope.Null);
+                .WithMessage(Scope.NotNull);
 
             //Name
             var Name = new ErrorMessages("Name");
             RuleFor(x => x.Name)
                 .NotNull()
-                .WithMessage(Name.Null)
+                .WithMessage(Name.NotNull)
 
                 .NotEmpty()
                 .WithMessage(Name.EmptyMethod())

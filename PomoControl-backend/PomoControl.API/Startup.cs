@@ -26,6 +26,7 @@ using PomoControl.Domain;
 using PomoControl.Service.DTO;
 using PomoControl.Service.ViewModels.User;
 using PomoControl.Service.ViewModels.Account;
+using PomoControl.Service.ViewModels.Token;
 
 namespace PomoControl.API
 {
@@ -54,7 +55,10 @@ namespace PomoControl.API
             var autoMapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDTO>().ReverseMap();
+                //cfg.CreateMap<User, TokenViewModel>().ReverseMap();
                 cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
+                cfg.CreateMap<SignInViewModel, User>().ReverseMap();
+                cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
                 cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
                 cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
                 //cfg.CreateMap<User, UserDTO>().ReverseMap();
@@ -65,7 +69,7 @@ namespace PomoControl.API
             #endregion
 
             #region Dependency Injection
-
+            services.AddSingleton(d => Configuration);
 
             //services.AddTransient<>(); //It starts a instance per use
             //services.AddSingleton<>(); // It starts a single instance per application
@@ -75,6 +79,7 @@ namespace PomoControl.API
             services.AddScoped<IScopeService, ScopeService>();
             services.AddScoped<IScopeRepository, ScopeRepository>();
 
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
             //services.AddScoped<IAccountRepository, AccountRepository>();
 
@@ -102,7 +107,7 @@ namespace PomoControl.API
                     //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
                     //ValidateAudience = false,
                     ValidateAudience = true,
-                    ValidAudience = Configuration["Jwt:Audiences"],
+                    ValidAudience = Configuration["Jwt:Audience"],
                     //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
                 };
             }).AddGoogle(x =>
@@ -123,7 +128,7 @@ namespace PomoControl.API
                             maxRetryDelay: TimeSpan.FromSeconds(6),
                             errorNumbersToAdd: null
                         ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
-            });
+            }, ServiceLifetime.Transient); //It starts a instance per use
             #endregion
 
             #region Swagger
@@ -162,6 +167,11 @@ namespace PomoControl.API
             //        new string[] { }
             //    }
             //    });
+            //});
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger PomoControl API", Version = "v1" });
             //});
 
             services.AddSwaggerGen(c =>
@@ -221,7 +231,7 @@ namespace PomoControl.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }

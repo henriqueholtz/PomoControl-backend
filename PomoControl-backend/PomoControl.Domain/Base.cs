@@ -7,7 +7,7 @@ namespace PomoControl.Domain
         public int Code { get; set; }
 
         internal List<string> _errors;
-        public IReadOnlyCollection<string> Erros => _errors;
+        public IReadOnlyList<string> Errors => _errors;
 
         public abstract bool Validate();
     }

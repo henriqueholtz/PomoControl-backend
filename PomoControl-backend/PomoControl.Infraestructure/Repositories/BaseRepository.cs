@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PomoControl.Core.Exceptions;
 using PomoControl.Domain;
 using PomoControl.Infraestructure.Context;
 using PomoControl.Infraestructure.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,10 +50,21 @@ namespace PomoControl.Infraestructure.Repositories
 
         public virtual async Task<T> Create(T entity)
         {
-            _context.Add(entity);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Add(entity);
+                await _context.SaveChangesAsync();
 
-            return entity;
+                return entity;
+            }
+            catch (RepositoryException ex)
+            {
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public virtual async Task<T> Update(T entity)
