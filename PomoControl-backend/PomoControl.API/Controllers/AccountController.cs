@@ -22,18 +22,16 @@ namespace PomoControl.API.Controllers
 
         [HttpPost]
         [Route("SignIn")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] SignInViewModel viewModel)
         {
             try
             {
                 var response = await _accountService.SignIn(viewModel);
-                if (response.Success)
-                {
-                    //Add Bearer Token in header of response ?
-                    return StatusCode(200, response);
-                }
-                return StatusCode(401, response);
+
+                //Add Bearer Token in header of response ?
+
+                return StatusCode(response.StatusCode, response);
             }
             catch (DomainException ex)
             {
@@ -51,7 +49,7 @@ namespace PomoControl.API.Controllers
 
         [HttpPost]
         [Route("SignUp")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> SignUp([FromBody] SignUpViewModel viewModel)
         {
             try

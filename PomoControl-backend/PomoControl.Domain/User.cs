@@ -50,6 +50,23 @@ namespace PomoControl.Domain
             return true;
         }
 
+        public bool ValidatePassword(string password)
+        {
+            if (String.IsNullOrWhiteSpace(password))
+                return false;
+
+            var base64Password = ConvertPassword(password);
+            if (base64Password.Equals(Password))
+                return true;
+
+            return false;
+        }
+
+        private string ConvertPassword(string password)
+        {
+            return Convert.ToBase64String(Encoding.ASCII.GetBytes(password.Trim()));
+        }
+
         public bool PasswordTransform()
         {
             if (_errors == null)
@@ -61,7 +78,7 @@ namespace PomoControl.Domain
                 throw new DomainException("Some properties are not valid", _errors);
             }
 
-            var base64Password = Convert.ToBase64String(Encoding.ASCII.GetBytes(Password.Trim()));
+            var base64Password = ConvertPassword(Password);
             Password = base64Password;
             PasswordVerify = base64Password;
 

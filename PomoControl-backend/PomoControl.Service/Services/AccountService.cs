@@ -33,12 +33,17 @@ namespace PomoControl.Service.Services
                 //verify if exist user with this email
                 var userExists = await _userRepository.GetByEmail(viewModel.Email);
                 if (userExists == null)
-                    return new ResponseDTO(401, viewModel, "Don't exists user registratate for this email! You can register.", false);
+                    return new ResponseDTO(401, viewModel.Email, "Don't exists user registratate for this email! You can register.", false);
 
-                string errorFailedLogin = "This Email and/or password is invalid!"; //For securty reasons the login failure return must be the same for incorret email and password
-                //if
+                if(!userExists.Active)
+                    return new ResponseDTO(401, viewModel.Email, "This user don't is active.", false);
 
-                return new ResponseDTO(400, new { }, "Don't implemented this method complet.", false);
+                if (!userExists.ValidatePassword(viewModel.Password))
+                    return new ResponseDTO(401, viewModel.Email, "This Email and/or Password don't is valid.", false);
+
+                var response = _tokenService.GenerateToken(new TokenViewModel(userExists));
+
+                return new ResponseDTO(200, response.Data, response.Message, true);
             }
             catch(ServiceException ex)
             {
