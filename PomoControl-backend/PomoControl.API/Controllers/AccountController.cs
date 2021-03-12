@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomoControl.API.Utilities;
-using PomoControl.Core.Exceptions;
-using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.Account;
-using System;
 using System.Threading.Tasks;
 
 namespace PomoControl.API.Controllers
@@ -25,26 +21,11 @@ namespace PomoControl.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] SignInViewModel viewModel)
         {
-            try
-            {
-                var response = await _accountService.SignIn(viewModel);
+            var response = await _accountService.SignIn(viewModel);
 
-                //Add Bearer Token in header of response ?
+            //Add Bearer Token in header of response ?
 
-                return StatusCode(response.StatusCode, response);
-            }
-            catch (DomainException ex)
-            {
-                return BadRequest(ex);
-            }
-            catch(ServiceException ex)
-            {
-                return BadRequest(ex);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost]
@@ -52,26 +33,11 @@ namespace PomoControl.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> SignUp([FromBody] SignUpViewModel viewModel)
         {
-            try
-            {
-                var response = await _accountService.SignUp(viewModel);
+            var response = await _accountService.SignUp(viewModel);
 
-                //Add Bearer Token in header of response?
+            //Add Bearer Token in header of response?
 
-                return StatusCode(response.StatusCode, response);
-            }
-            catch (DomainException ex)
-            {
-                return BadRequest(Responses.DomainErrorMessage(ex.Message, ex.Errors));
-            }
-            catch (RepositoryException ex)
-            {
-                return StatusCode(500, $"Repository Exception : {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, Responses.ApplicationErrorMessage());
-            }
+            return StatusCode(response.StatusCode, response);
         }
 
     }

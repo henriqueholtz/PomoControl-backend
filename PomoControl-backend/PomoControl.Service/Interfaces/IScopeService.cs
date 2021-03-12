@@ -6,10 +6,10 @@ namespace PomoControl.Service.Interfaces
 {
     public interface IScopeService
     {
-        Task<ScopeDTO> Create(ScopeDTO scopeDTO);
-        Task<ScopeDTO> Update(ScopeDTO scopeDTO);
+        Task<ResponseDTO> Create(ScopeDTO scopeDTO);
+        Task<ResponseDTO> Update(ScopeDTO scopeDTO);
         Task Remove(int code);
-        Task<ScopeDTO> Get(int code);
-        Task<List<ScopeDTO>> SearchByName(string name);
+        Task<ResponseDTO> Get(int code);
+        Task<List<ResponseDTO>> SearchByName(string name);
     }
 }

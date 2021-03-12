@@ -7,7 +7,6 @@ using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.User;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PomoControl.Service.Services

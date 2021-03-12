@@ -33,7 +33,5 @@ namespace PomoControl.Service.ViewModels.Account
         [MaxLength(130, ErrorMessage = "The maximum length for Passowrd Verify is 130 characters.")]
         [RegularExpression(HelperRegex.Password, ErrorMessage = "This Email and/or Password don't is valid.")]
         public string PasswordVerify { get; set; }
-        //public bool Active { get; } = true;
-        //public DateTime RegisteredDate { get; } = DateTime.Now;
     }
 }

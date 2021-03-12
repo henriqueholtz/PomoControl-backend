@@ -1,5 +1,4 @@
 ﻿using PomoControl.Core;
-using PomoControl.Domain;
 using PomoControl.Service.ViewModels.Token;
 
 namespace PomoControl.Service.Interfaces
@@ -9,5 +8,6 @@ namespace PomoControl.Service.Interfaces
         ResponseDTO<string> GenerateToken(TokenViewModel viewModel);
         //UpdateToken
         //RevokeToken
+        //Block token
     }
 }
