@@ -1,4 +1,4 @@
-﻿namespace PomoControll.Core.Enums.Entities
+﻿namespace PomoControl.Core.Enums.Entities
 {
     public enum EnumTypeScope : byte
     {
