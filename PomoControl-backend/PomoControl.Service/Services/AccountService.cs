@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PomoControl.Core.Enums.Messages;
 using PomoControl.Core.Exceptions;
 using PomoControl.Domain;
 using PomoControl.Infraestructure.Interfaces;
@@ -37,7 +38,7 @@ namespace PomoControl.Service.Services
                     return new ResponseDTO(401, viewModel.Email, "This user don't is active.", false);
 
                 if (!userExists.ValidatePassword(viewModel.Password))
-                    return new ResponseDTO(401, viewModel.Email, "This Email and/or Password don't is valid.", false);
+                    return new ResponseDTO(401, viewModel.Email, ErrorMessagesStatic.IncorretLogin, false);
 
                 var response = _tokenService.GenerateToken(new TokenViewModel(userExists));
 

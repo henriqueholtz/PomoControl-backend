@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using PomoControl.Core.Enums.Messages;
 using PomoControl.Core.Helpers;
-using System;
 
 namespace PomoControl.Domain.Validators
 {
@@ -47,7 +46,7 @@ namespace PomoControl.Domain.Validators
                 .MaximumLength(180)
                 .WithMessage(Email.MaximumLength(180))
 
-                .Matches(HelperRegex.Email)
+                .Matches(HelperRegex.EmailRegex)
                 .WithMessage(Email.NotValid);
 
             //Password
@@ -65,11 +64,8 @@ namespace PomoControl.Domain.Validators
                 .MaximumLength(80)
                 .WithMessage(Password.MaximumLength(80))
 
-                .Matches(HelperRegex.HasLetter)
-                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ")
-
-                .Matches(HelperRegex.HasNumber)
-                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ")
+                .Matches(HelperRegex.PasswordRegex)
+                .WithMessage(ErrorMessagesStatic.IncorretLogin)
 
                 .Equal(y => y.PasswordVerify)
                 .WithMessage("Password and Password Verify are different.");
@@ -91,11 +87,8 @@ namespace PomoControl.Domain.Validators
                 .MaximumLength(80)
                 .WithMessage(PasswordVerify.MaximumLength(80))
 
-                .Matches(HelperRegex.HasLetter)
-                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ")
-
-                .Matches(HelperRegex.HasNumber)
-                .WithMessage($"{Password.NotValid} (Note: the password need eight characters, at least one letter and one number.) ");
+                .Matches(HelperRegex.PasswordRegex)
+                .WithMessage(ErrorMessagesStatic.IncorretLogin);
 
             //Active
         }

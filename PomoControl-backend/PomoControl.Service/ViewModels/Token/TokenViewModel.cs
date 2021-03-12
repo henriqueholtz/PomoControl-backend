@@ -31,7 +31,7 @@ namespace PomoControl.Service.ViewModels.Token
 
 
         [Required(ErrorMessage = ErrorMessagesStatic.Required)]
-        [RegularExpression(HelperRegex.Email, ErrorMessage = "This Email don't is valid!")]
+        [RegularExpression(HelperRegex.EmailRegex, ErrorMessage = "This Email don't is valid!")]
         [MinLength(6, ErrorMessage = "The minimum length for Email is 6 characters.")]
         [MaxLength(150, ErrorMessage = "The maximum length for Name is 150 characters.")]
         public string Email { get; private set; }
