@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using PomoControl.Core;
 using PomoControl.Core.Exceptions;
-using PomoControl.Domain;
+using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.Token;
 using System;
@@ -58,6 +58,11 @@ namespace PomoControl.Service.Services
             {
                 return new ResponseDTO<string>("The JWT Token could not be generared, an exception was thrown: " + ex.Message);
             }
+        }
+
+        public ResponseDTO<TokenClaimsDTO> GetTokenClaims(string accessToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
