@@ -9,18 +9,18 @@ namespace PomoControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : PomoController
+    public class UserController : ControllerBase
     {
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([FromBody] CreateUserViewModel user )
+        public async Task<IActionResult> Create([FromBody] CreateUserViewModel user)
         {
             try
             {
                 //var response
                 return StatusCode(501, user);
             }
-            catch(DomainException ex)
+            catch (DomainException ex)
             {
                 return BadRequest(ex);
             }

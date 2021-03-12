@@ -8,7 +8,7 @@ namespace PomoControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : PomoController
+    public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
         public AccountController(IAccountService accountService)

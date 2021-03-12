@@ -5,7 +5,7 @@ namespace PomoControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SecureController : PomoController
+    public class SecureController : ControllerBase
     {
 
         [HttpGet]

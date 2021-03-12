@@ -9,7 +9,7 @@ namespace PomoControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ScopeController : PomoController
+    public class ScopeController : ControllerBase
     {
         private readonly IScopeService _scopeService;
         private readonly IMapper _mapper;

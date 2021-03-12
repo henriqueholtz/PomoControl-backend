@@ -6,7 +6,7 @@ namespace PomoControl.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : PomoController
+    public class HomeController : ControllerBase
     {
         [HttpGet]
         [AllowAnonymous]
