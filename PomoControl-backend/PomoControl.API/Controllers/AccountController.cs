@@ -23,7 +23,8 @@ namespace PomoControl.API.Controllers
         {
             var response = await _accountService.SignIn(viewModel);
 
-            //Add Bearer Token in header of response ?
+            if (response.Success)
+                HttpContext.Response.Headers.Add("accesToken", response.Data);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -35,7 +36,8 @@ namespace PomoControl.API.Controllers
         {
             var response = await _accountService.SignUp(viewModel);
 
-            //Add Bearer Token in header of response?
+            if (response.Success)
+                HttpContext.Response.Headers.Add("accesToken", response.Data);
 
             return StatusCode(response.StatusCode, response);
         }

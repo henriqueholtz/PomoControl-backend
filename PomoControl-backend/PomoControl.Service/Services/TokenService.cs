@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PomoControl.Core;
 using PomoControl.Core.Exceptions;
@@ -9,6 +10,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using static PomoControl.Service.CustomAuthorization;
 
 namespace PomoControl.Service.Services
 {
@@ -60,9 +62,28 @@ namespace PomoControl.Service.Services
             }
         }
 
-        public ResponseDTO<TokenClaimsDTO> GetTokenClaims(string accessToken)
+        public ResponseDTO<TokenClaimsDTO> GetTokenClaims(HttpContext context, bool itemsIgnore = true)
         {
-            throw new NotImplementedException();
+            var claims = GetClaimsUser(context, itemsIgnore);
+            TokenClaimsDTO tokenClaimsDTO = new TokenClaimsDTO();
+            foreach(var claim in claims)
+            {
+                switch(claim.Type.ToLower())
+                {
+                    case "code":
+                        tokenClaimsDTO.Code = Convert.ToInt32(claim.Value);
+                        break;
+
+                    case "name":
+                        tokenClaimsDTO.Name = claim.Value;
+                        break;
+
+                    case "emailaddress":
+                        tokenClaimsDTO.Email = claim.Value;
+                        break;
+                }
+            }
+            return new ResponseDTO<TokenClaimsDTO>(tokenClaimsDTO);
         }
     }
 }

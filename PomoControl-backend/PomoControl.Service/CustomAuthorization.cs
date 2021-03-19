@@ -7,16 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace PomoControl.API
+namespace PomoControl.Service
 {
     public class CustomAuthorization
     {
-        private readonly IMapper _mapper;
-        public CustomAuthorization(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
         public static bool ValidateClaimsUser(HttpContext context, string claimName, string claimValue)
         {
             return context.User.Identity.IsAuthenticated &&

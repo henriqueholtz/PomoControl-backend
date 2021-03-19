@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PomoControl.Service.DTO;
 using System.Collections.Generic;
-using static PomoControl.API.CustomAuthorization;
+using static PomoControl.Service.CustomAuthorization;
 
 namespace PomoControl.API.Controllers
 {
