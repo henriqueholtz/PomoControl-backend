@@ -6,63 +6,64 @@ namespace PomoControl.Domain.Validators
 {
     public class UserValidator : AbstractValidator<User>
     {
+        private readonly ErrorMessages _user = new ErrorMessages("User");
+        private readonly ErrorMessages _name = new ErrorMessages("Name");
+        private readonly ErrorMessages _email = new ErrorMessages("Email");
+        private readonly ErrorMessages _password = new ErrorMessages("Password");
+        private readonly ErrorMessages _passwordVerify = new ErrorMessages("Password Verify");
         public UserValidator()
         {
-            var User = new ErrorMessages("User");
             RuleFor(x => x)
                 .NotEmpty()
-                .WithMessage(User.NotEmpty)
+                .WithMessage(_user.NotEmpty)
 
                 .NotNull()
-                .WithMessage(User.NotNull);
+                .WithMessage(_user.NotNull);
 
             //Name
-            var Name = new ErrorMessages("Name");
             RuleFor(x => x.Name)
                 .NotNull()
-                .WithMessage(Name.NotNull)
+                .WithMessage(_name.NotNull)
 
                 .NotEmpty()
-                .WithMessage(Name.EmptyMethod())
+                .WithMessage(_name.EmptyMethod())
 
                 .MinimumLength(3)
-                .WithMessage(Name.MaximumLength(3))
+                .WithMessage(_name.MaximumLength(3))
 
                 .MaximumLength(75)
-                .WithMessage(Name.MaximumLength(75));
+                .WithMessage(_name.MaximumLength(75));
 
             //Email
-            var Email = new ErrorMessages("Email");
             RuleFor(x => x.Email)
                 .NotNull()
-                .WithMessage(Email.NotNull)
+                .WithMessage(_email.NotNull)
 
                 .NotEmpty()
-                .WithMessage(Email.NotEmpty)
+                .WithMessage(_email.NotEmpty)
 
                 .MinimumLength(10)
-                .WithMessage(Email.MinimumLength(10))
+                .WithMessage(_email.MinimumLength(10))
 
                 .MaximumLength(180)
-                .WithMessage(Email.MaximumLength(180))
+                .WithMessage(_email.MaximumLength(180))
 
                 .Matches(HelperRegex.EmailRegex)
-                .WithMessage(Email.NotValid);
+                .WithMessage(_email.NotValid);
 
             //Password
-            var Password = new ErrorMessages("Password");
             RuleFor(x => x.Password)
                 .NotNull()
-                .WithMessage(Password.NotNull)
+                .WithMessage(_password.NotNull)
 
                 .NotEmpty()
-                .WithMessage(Password.NotEmpty)
+                .WithMessage(_password.NotEmpty)
 
                 .MinimumLength(8)
-                .WithMessage(Password.MinimumLength(8))
+                .WithMessage(_password.MinimumLength(8))
 
                 .MaximumLength(80)
-                .WithMessage(Password.MaximumLength(80))
+                .WithMessage(_password.MaximumLength(80))
 
                 .Matches(HelperRegex.PasswordRegex)
                 .WithMessage(ErrorMessagesStatic.IncorretLogin)
@@ -73,19 +74,18 @@ namespace PomoControl.Domain.Validators
 
 
             //PasswordVerify
-            var PasswordVerify = new ErrorMessages("Password Verify");
             RuleFor(x => x.Password)
                 .NotNull()
-                .WithMessage(PasswordVerify.NotNull)
+                .WithMessage(_passwordVerify.NotNull)
 
                 .NotEmpty()
-                .WithMessage(PasswordVerify.NotEmpty)
+                .WithMessage(_passwordVerify.NotEmpty)
 
                 .MinimumLength(8)
-                .WithMessage(PasswordVerify.MinimumLength(8))
+                .WithMessage(_passwordVerify.MinimumLength(8))
 
                 .MaximumLength(80)
-                .WithMessage(PasswordVerify.MaximumLength(80))
+                .WithMessage(_passwordVerify.MaximumLength(80))
 
                 .Matches(HelperRegex.PasswordRegex)
                 .WithMessage(ErrorMessagesStatic.IncorretLogin);

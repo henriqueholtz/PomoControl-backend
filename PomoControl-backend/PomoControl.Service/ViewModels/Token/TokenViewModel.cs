@@ -9,7 +9,7 @@ namespace PomoControl.Service.ViewModels.Token
     {
         public TokenViewModel(PomoControl.Domain.User user)
         {
-            user.Validate();
+            //user.Validate(); //It is not possible at the moment because the password will be in base64, not compluing with the regex.
             if (!user.Errors.Any())
             {
                 Code = user.Code;

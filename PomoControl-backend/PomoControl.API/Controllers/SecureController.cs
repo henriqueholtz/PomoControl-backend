@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static PomoControl.API.CustomAuthorization;
 
 namespace PomoControl.API.Controllers
 {
@@ -15,6 +16,7 @@ namespace PomoControl.API.Controllers
 
         [HttpPost]
         [Route("post")]
+        [ClaimsAuthorize("Code", "2")]
         [Authorize]
         //[AllowAnonymous]
         public string GetAuthorizePost() => "Authorize POST!!";

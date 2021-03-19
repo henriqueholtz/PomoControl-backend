@@ -42,7 +42,7 @@ namespace PomoControl.Service.Services
 
                 var response = _tokenService.GenerateToken(new TokenViewModel(userExists));
 
-                return new ResponseDTO(200, response.Data, response.Message, true);
+                return new ResponseDTO(200, response.Data, "Login successfully", true);
             }
             catch(RepositoryException ex)
             {
