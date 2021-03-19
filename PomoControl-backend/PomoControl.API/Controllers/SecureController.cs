@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PomoControl.Service.DTO;
+using System.Collections.Generic;
 using static PomoControl.API.CustomAuthorization;
 
 namespace PomoControl.API.Controllers
@@ -10,9 +12,16 @@ namespace PomoControl.API.Controllers
     {
 
         [HttpGet]
+        [Route("claims")]
+        [Authorize]
+        //[AllowAnonymous]
+        public List<ClaimDTO> GetClaims() => GetClaimsUser(HttpContext);
+
+        [HttpGet]
         [Authorize]
         //[AllowAnonymous]
         public string GetAuthorize() => "Authorize!!";
+
 
         [HttpPost]
         [Route("post")]
