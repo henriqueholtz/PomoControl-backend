@@ -15,7 +15,7 @@ namespace PomoControl.API.Controllers
         [Route("claims")]
         [Authorize]
         //[AllowAnonymous]
-        public List<ClaimDTO> GetClaims() => GetClaimsUser(HttpContext);
+        public List<ClaimDTO> GetClaims([FromQuery] bool ignoreDefaultItems = true) => GetClaimsUser(HttpContext, ignoreDefaultItems);
 
         [HttpGet]
         [Authorize]
