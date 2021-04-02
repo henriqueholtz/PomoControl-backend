@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.Account;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PomoControl.API.Controllers
@@ -24,7 +26,7 @@ namespace PomoControl.API.Controllers
             var response = await _accountService.SignIn(viewModel);
 
             if (response.Success)
-                HttpContext.Response.Headers.Add("accesToken", response.Data);
+                HttpContext.Response.Headers.Add("accesToken", response.AccessToken);
 
             return StatusCode(response.StatusCode, response);
         }
@@ -37,7 +39,7 @@ namespace PomoControl.API.Controllers
             var response = await _accountService.SignUp(viewModel);
 
             if (response.Success)
-                HttpContext.Response.Headers.Add("accesToken", response.Data);
+                HttpContext.Response.Headers.Add("accesToken", response.AccessToken);
 
             return StatusCode(response.StatusCode, response);
         }

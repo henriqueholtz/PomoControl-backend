@@ -2,7 +2,6 @@
 using PomoControl.Domain.Validators;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PomoControl.Domain
 {
@@ -14,8 +13,7 @@ namespace PomoControl.Domain
         public string PasswordVerify { get; private set; }
         public bool Active { get; private set; }
         public DateTime RegisteredDate { get; private set; }
-
-        public User()
+        private User()
         {
             _errors = new List<string>();
             RegisteredDate = DateTime.Now;
@@ -47,42 +45,8 @@ namespace PomoControl.Domain
                 }
                 throw new DomainException("Some properties are not valid", _errors);
             }
+
             return true;
-        }
-
-        public bool ValidatePassword(string password)
-        {
-            if (String.IsNullOrWhiteSpace(password))
-                return false;
-
-            var base64Password = ConvertPassword(password);
-            if (base64Password.Equals(Password))
-                return true;
-
-            return false;
-        }
-
-        private string ConvertPassword(string password)
-        {
-            return Convert.ToBase64String(Encoding.ASCII.GetBytes(password.Trim()));
-        }
-
-        public bool PasswordTransform()
-        {
-            if (_errors == null)
-                _errors = new List<string>();
-
-            if (String.IsNullOrWhiteSpace(Password) || !Password.Equals(PasswordVerify))
-            {
-                _errors.Add("Password and Password Verify are different.");
-                throw new DomainException("Some properties are not valid", _errors);
-            }
-
-            var base64Password = ConvertPassword(Password);
-            Password = base64Password;
-            PasswordVerify = base64Password;
-
-            return _errors.Count == 0;
         }
     }
 }

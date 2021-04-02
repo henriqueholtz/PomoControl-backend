@@ -6,7 +6,7 @@ namespace PomoControl.Service.Interfaces
 {
     public interface IAccountService
     {
-        Task<ResponseDTO> SignIn(SignInViewModel viewModel);
-        Task<ResponseDTO> SignUp(SignUpViewModel viewModel);
+        Task<ResonseWithTokenDTO> SignIn(SignInViewModel viewModel);
+        Task<ResonseWithTokenDTO> SignUp(SignUpViewModel viewModel);
     }
 }

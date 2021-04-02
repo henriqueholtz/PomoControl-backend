@@ -28,6 +28,7 @@ using PomoControl.Service.ViewModels.User;
 using PomoControl.Service.ViewModels.Account;
 using PomoControl.Service.ViewModels.Token;
 using EscNet.DependencyInjection.IoC.Cryptography;
+using PomoControl.Core.Helpers;
 
 namespace PomoControl.API
 {
@@ -70,7 +71,9 @@ namespace PomoControl.API
             #endregion
 
             #region Dependency Injection
+            services.AddHttpClient();
             services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
+            services.AddSingleton<CryptographyHelper>();
             services.AddSingleton(d => Configuration);
 
             //services.AddTransient<>(); //It starts a instance per use
@@ -81,8 +84,8 @@ namespace PomoControl.API
             services.AddScoped<IScopeService, ScopeService>();
             services.AddScoped<IScopeRepository, ScopeRepository>();
 
+            services.AddTransient<IAccountService, AccountService>();
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IAccountService, AccountService>();
             //services.AddScoped<IAccountRepository, AccountRepository>();
 
             //services.AddScoped<IScopeItemService, ScopeItemService>();

@@ -17,4 +17,18 @@
             Success = success;
         }
     }
+
+    public class ResonseWithTokenDTO : ResponseDTO
+    {
+        public string AccessToken { get; set; }
+
+        public ResonseWithTokenDTO(int statusCode, dynamic data, string accessToken, string message, bool success)
+        {
+            StatusCode = statusCode;
+            Data = data;
+            Message = message;
+            Success = success;
+            AccessToken = accessToken;
+        }
+    }
 }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace PomoControl.Core.Enums.Messages
 {
-    //public static class ErrorMessagesEntity<T> where T : class
-        //private const string EntityName = nameof(T);
     public static class ErrorMessagesStatic
     {
-        public const string IncorretLogin = "This Email and/or Password don't is valid.";
         //Empty
         public const string Empty = "This don't can is Empty!";
         public const string EmptyName = "The Name don't can is Empty!";  

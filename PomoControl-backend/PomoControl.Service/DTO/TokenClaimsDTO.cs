@@ -1,5 +1,9 @@
-﻿namespace PomoControl.Service.DTO
+﻿using AutoMapper;
+using PomoControl.Domain;
+
+namespace PomoControl.Service.DTO
 {
+    [AutoMap(typeof(User))]
     public class TokenClaimsDTO
     {
         public int Code { get; set; }

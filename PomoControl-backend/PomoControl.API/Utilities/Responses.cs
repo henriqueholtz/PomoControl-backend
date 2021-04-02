@@ -1,8 +1,5 @@
 ﻿using PomoControl.Service.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PomoControl.API.Utilities
 {
@@ -39,13 +36,13 @@ namespace PomoControl.API.Utilities
             };
         }
 
-        public static ResponseDTO UnauthorizedErrorMessage()
+        public static ResponseDTO UnauthorizedErrorMessage(string email)
         {
             return new ResponseDTO
             {
                 Message = "This Email and/or Password don't is valid.",
                 Success = false,
-                Data = null
+                Data = new { email }
             };
         }
     }

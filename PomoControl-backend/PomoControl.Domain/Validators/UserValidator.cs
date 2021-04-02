@@ -62,15 +62,8 @@ namespace PomoControl.Domain.Validators
                 .MinimumLength(8)
                 .WithMessage(_password.MinimumLength(8))
 
-                .MaximumLength(80)
-                .WithMessage(_password.MaximumLength(80))
-
-                .Matches(HelperRegex.PasswordRegex)
-                .WithMessage(ErrorMessagesStatic.IncorretLogin)
-
-                .Equal(y => y.PasswordVerify)
-                .WithMessage("Password and Password Verify are different.");
-
+                .MaximumLength(300)
+                .WithMessage(_password.MaximumLength(300));
 
 
             //PasswordVerify
@@ -84,11 +77,8 @@ namespace PomoControl.Domain.Validators
                 .MinimumLength(8)
                 .WithMessage(_passwordVerify.MinimumLength(8))
 
-                .MaximumLength(80)
-                .WithMessage(_passwordVerify.MaximumLength(80))
-
-                .Matches(HelperRegex.PasswordRegex)
-                .WithMessage(ErrorMessagesStatic.IncorretLogin);
+                .MaximumLength(300)
+                .WithMessage(_passwordVerify.MaximumLength(300));
 
             //Active
         }

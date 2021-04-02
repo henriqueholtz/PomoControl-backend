@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using EscNet.Shared.Extensions;
+using PomoControl.Core.DefaultErrorMessages;
 using PomoControl.Core.Enums.Messages;
 using PomoControl.Core.Exceptions;
+using PomoControl.Core.Helpers;
 using PomoControl.Domain;
 using PomoControl.Infraestructure.Interfaces;
 using PomoControl.Service.DTO;
@@ -18,61 +21,65 @@ namespace PomoControl.Service.Services
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
-        public AccountService(IMapper mapper, IUserRepository userRepository, ITokenService tokenService)
+        private readonly CryptographyHelper _cryptographyHelper;
+        public AccountService(IMapper mapper, IUserRepository userRepository, ITokenService tokenService, CryptographyHelper cryptographyHelper)
         {
             _mapper = mapper;
             _userRepository = userRepository;
             _tokenService = tokenService;
+            _cryptographyHelper = cryptographyHelper;
         }
 
-        public async Task<ResponseDTO> SignIn(SignInViewModel viewModel)
+        public async Task<ResonseWithTokenDTO> SignIn(SignInViewModel viewModel)
         {
             try
             {
                 //verify if exist user with this email
                 var userExists = await _userRepository.GetByEmail(viewModel.Email);
                 if (userExists == null)
-                    return new ResponseDTO(401, viewModel.Email, "Don't exists user registratate for this email! You can register.", false);
+                    return new ResonseWithTokenDTO(401, viewModel.Email, "", "Don't exists user registratate for this email! You can register.", false);
 
                 if(!userExists.Active)
-                    return new ResponseDTO(401, viewModel.Email, "This user don't is active.", false);
+                    return new ResonseWithTokenDTO(401, viewModel.Email, "", "This user don't is active.", false);
 
-                if (!userExists.ValidatePassword(viewModel.Password))
-                    return new ResponseDTO(401, viewModel.Email, ErrorMessagesStatic.IncorretLogin, false);
+                if (!userExists.Password.Equals(_cryptographyHelper.Encrypt(viewModel.Password)))
+                    return new ResonseWithTokenDTO(401, viewModel.Email, "", DefaultErrorMessages.InvalidLogin, false);
 
                 var response = _tokenService.GenerateToken(new TokenViewModel(userExists));
 
-                return new ResponseDTO(200, response.Data, "Login successfully", true);
+                return new ResonseWithTokenDTO(200, new { }, response.Data, "Login successfully", true);
             }
             catch(RepositoryException ex)
             {
-                return new ResponseDTO(500, ex, "An error ocurred.", false);
+                return new ResonseWithTokenDTO(500, ex, "", "An error ocurred.", false);
             }
             catch(ServiceException ex)
             {
-                return new ResponseDTO(500, ex, "An error ocurred.", false);
+                return new ResonseWithTokenDTO(500, ex, "", "An error ocurred.", false);
             }
             catch(Exception ex)
             {
-                return new ResponseDTO(500, ex, "An error ocurred.", false);
+                return new ResonseWithTokenDTO(500, ex, "", "An error ocurred.", false);
             }
         }
 
-        public async Task<ResponseDTO> SignUp(SignUpViewModel viewModel)
+        public async Task<ResonseWithTokenDTO> SignUp(SignUpViewModel viewModel)
         {
             try
             {
                 //verify if exist user with this email
                 var userExists = await _userRepository.GetByEmail(viewModel.Email);
                 if (userExists != null)
-                    return new ResponseDTO(401, viewModel, "There is Already a registration for this email.", false);
+                    return new ResonseWithTokenDTO(401, viewModel.Email, "", "There is Already a registration for this email.", false);
+
+                if (String.IsNullOrWhiteSpace(viewModel.Password) || viewModel.Password != viewModel.PasswordVerify)
+                    throw new InvalidLoginException("Your password is different from the verification password.");
+
+                viewModel.Password = _cryptographyHelper.Encrypt(viewModel.Password.ToBase64());
+                viewModel.PasswordVerify = viewModel.Password;
 
                 var user = _mapper.Map<User>(viewModel);
                 user.Validate();
-
-                //Password transform to save in database
-                if (!user.PasswordTransform())
-                    throw new DomainException("An or more errors ocurred.", user.Errors.ToList());
 
                 var userCreated = await _userRepository.Create(user);
                 if (userCreated == null)
@@ -82,19 +89,29 @@ namespace PomoControl.Service.Services
                 var response = _tokenService.GenerateToken(new TokenViewModel(userCreated));
                 var acessToken = response.Data;
 
-                return new ResponseDTO(200, new { userCreated, acessToken }, "User created with success!", true);
+                var userResponse = new TokenClaimsDTO()
+                {
+                    Code = userCreated.Code,
+                    Email = userCreated.Email,
+                    Name = userCreated.Name
+                };
+                return new ResonseWithTokenDTO(200, new { userResponse}, acessToken, "User created with success!", true);
+            }
+            catch(InvalidLoginException ex)
+            {
+                return new ResonseWithTokenDTO(500, ex, ex.Message, "", false);
             }
             catch (RepositoryException ex)
             {
-                return new ResponseDTO(500, ex, "An error ocurred.", false);
+                return new ResonseWithTokenDTO(500, ex, "", "An error ocurred.", false);
             }
             catch (ServiceException ex)
             {
-                return new ResponseDTO(500, ex, "An error ocurred.", false);
+                return new ResonseWithTokenDTO(500, ex, "", "An error ocurred.", false);
             }
             catch (Exception ex)
             {
-                return new ResponseDTO(500, ex, "An error ocurred.", false);
+                return new ResonseWithTokenDTO(500, ex, "", "An error ocurred.", false);
             }
         }
     }

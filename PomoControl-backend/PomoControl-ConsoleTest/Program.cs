@@ -22,7 +22,7 @@ namespace PomoControl_ConsoleTest
             Console.WriteLine("");
 
             Console.Write("Encrypting... ");
-            var encrypted = eventService.Encrypt("@Abc123!");
+            var encrypted = eventService.Encrypt("Abc@123456");
             Console.WriteLine(encrypted);
 
             Console.Write("Decrypting... ");
@@ -31,6 +31,7 @@ namespace PomoControl_ConsoleTest
 
             Console.WriteLine();
             Console.WriteLine("The execution is finished.");
+            Console.ReadKey();
         }
         public static void ConfigureServices(IServiceCollection services)
         {
