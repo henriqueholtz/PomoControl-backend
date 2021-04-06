@@ -7,7 +7,9 @@ using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.Token;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using static PomoControl.Service.CustomAuthorization;
@@ -50,15 +52,15 @@ namespace PomoControl.Service.Services
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                return new ResponseDTO<string>(tokenHandler.WriteToken(token));
+                return new ResponseDTO<string>(tokenHandler.WriteToken(token), "", true);
             }
             catch (ServiceException ex)
             {
-                return new ResponseDTO<string>("The JWT Token could not be generared, an exception was thrown: " + ex.Message);
+                return new ResponseDTO<string>("The JWT Token could not be generared, an exception was thrown: " + ex.Message, false);
             }
             catch (Exception ex)
             {
-                return new ResponseDTO<string>("The JWT Token could not be generared, an exception was thrown: " + ex.Message);
+                return new ResponseDTO<string>("The JWT Token could not be generared, an exception was thrown: " + ex.Message, false);
             }
         }
 
@@ -83,7 +85,36 @@ namespace PomoControl.Service.Services
                         break;
                 }
             }
-            return new ResponseDTO<TokenClaimsDTO>(tokenClaimsDTO);
+            return new ResponseDTO<TokenClaimsDTO>(tokenClaimsDTO, "", true);
+        }
+
+        public ResponseDTO<dynamic> GetClaimsFromList(HttpContext context, List<string> claims)
+        {
+            if (!claims.Any())
+                return null;
+
+            var allClaims = GetClaimsUser(context, true);
+            var result = (from x in allClaims join y in claims on x.Type.ToLower() equals y.ToLower() select x).ToList();
+            return new ResponseDTO<dynamic>(result, "", true);
+        }
+
+        public ResponseDTO<int> GetCode(HttpContext context)
+        {
+            var allClaims = GetClaimsUser(context);
+            var claimCode = allClaims.FirstOrDefault(x => x.Type.Equals("Code"));
+            int code = 0;
+            if (claimCode == null || !Int32.TryParse(claimCode.Value, out code))
+                return new ResponseDTO<int>(0, "", false);
+            return new ResponseDTO<int>(code, "", true);
+        }
+
+        public ResponseDTO<string> GetEmail(HttpContext context)
+        {
+            var allClaims = GetClaimsUser(context);
+            var claimEmail = allClaims.FirstOrDefault(x => x.Type.Equals("emailaddress"));
+            if (claimEmail == null || String.IsNullOrWhiteSpace(claimEmail.Value))
+                return new ResponseDTO<string>("", false);
+            return new ResponseDTO<string>(claimEmail.Value, "", true);
         }
     }
 }

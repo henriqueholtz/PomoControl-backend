@@ -4,6 +4,7 @@ using PomoControl.Domain;
 using PomoControl.Infraestructure.Interfaces;
 using PomoControl.Service.DTO;
 using PomoControl.Service.Interfaces;
+using PomoControl.Service.ViewModels.Account;
 using PomoControl.Service.ViewModels.User;
 using System;
 using System.Collections.Generic;
@@ -22,23 +23,25 @@ namespace PomoControl.Service.Services
             _userRepository = userRepository;
         }
 
-        public Task<UserDTO> ChangeStatus(int code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<UserDTO> Create(CreateUserViewModel userViewModel)
+        public async Task<ResponseServiceDTO> ChangeStatus(ChangeStatusViewModel viewModel)
         {
             try
             {
-                var userExist = await _userRepository.GetByEmail(userViewModel.Email);
-                if (userExist != null)
-                    throw new DomainException("There is already a user with that email! Please login.");
+                var userExist = await _userRepository.GetByEmail(viewModel.Email);
+                if (userExist == null)
+                    throw new DomainException("This Email don't is registered"); //Warning here
 
-                var user = _mapper.Map<User>(userViewModel);
-                user.Validate();
-                var userCreated = await _userRepository.Create(user);
-                return _mapper.Map<UserDTO>(userCreated);
+                if(viewModel != null && viewModel.Active.Equals(userExist.Active))
+                {
+                    return new ResponseServiceDTO(200, _mapper.Map<UserSimpleDTO>(userExist), "Success! Your user already had this status.", true);
+                }
+                
+                var response = await _userRepository.ChangeStatus(userExist, viewModel.Active);
+                if (response.Success)
+                {
+                    return new ResponseServiceDTO(200, _mapper.Map<UserSimpleDTO>(userExist), "Success! Your user has been updated (Status only).", true);
+                }
+                return new ResponseServiceDTO(500, viewModel, $"An error ocurred: {response.Message}", false);
             }
             catch (DomainException ex)
             {
@@ -46,8 +49,32 @@ namespace PomoControl.Service.Services
             }
             catch (Exception ex)
             {
-                throw new ServiceException("Ocurred an error on create User! Try again later.", ex);
+                throw new ServiceException("Ocurred an error on change status for this user! Try again later.", ex);
             }
+        }
+
+        public async Task<UserDTO> Create(CreateUserViewModel userViewModel)
+        {
+            //try
+            //{
+            //    var userExist = await _userRepository.GetByEmail(userViewModel.Email);
+            //    if (userExist != null)
+            //        throw new DomainException("There is already a user with that email! Please login.");
+
+            //    var user = _mapper.Map<User>(userViewModel);
+            //    user.Validate();
+            //    var userCreated = await _userRepository.Create(user);
+            //    return _mapper.Map<UserDTO>(userCreated);
+            //}
+            //catch (DomainException ex)
+            //{
+            //    throw new DomainException(ex.Message, ex);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new ServiceException("Ocurred an error on create User! Try again later.", ex);
+            //}
+            throw new NotImplementedException();
         }
 
         public Task<UserDTO> Get(int code)

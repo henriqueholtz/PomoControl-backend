@@ -5,9 +5,9 @@ namespace PomoControl.API.Utilities
 {
     public static class Responses
     {
-        public static ResponseDTO ApplicationErrorMessage()
+        public static ResponseServiceDTO ApplicationErrorMessage()
         {
-            return new ResponseDTO
+            return new ResponseServiceDTO
             {
                 Message = "An ocurred internal error. Please, try again later. ",
                 Success = false,
@@ -16,9 +16,9 @@ namespace PomoControl.API.Utilities
         }
 
         
-        public static ResponseDTO DomainErrorMessage(string message)
+        public static ResponseServiceDTO DomainErrorMessage(string message)
         {
-            return new ResponseDTO
+            return new ResponseServiceDTO
             {
                 Message = message,
                 Success = false,
@@ -26,9 +26,9 @@ namespace PomoControl.API.Utilities
             };
         }
         
-        public static ResponseDTO DomainErrorMessage(string message, IReadOnlyCollection<string> errors)
+        public static ResponseServiceDTO DomainErrorMessage(string message, IReadOnlyCollection<string> errors)
         {
-            return new ResponseDTO
+            return new ResponseServiceDTO
             {
                 Message = message,
                 Success = false,
@@ -36,9 +36,9 @@ namespace PomoControl.API.Utilities
             };
         }
 
-        public static ResponseDTO UnauthorizedErrorMessage(string email)
+        public static ResponseServiceDTO UnauthorizedErrorMessage(string email)
         {
-            return new ResponseDTO
+            return new ResponseServiceDTO
             {
                 Message = "This Email and/or Password don't is valid.",
                 Success = false,

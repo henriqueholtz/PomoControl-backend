@@ -4,6 +4,7 @@ using Microsoft.Extensions.Primitives;
 using PomoControl.Service.Interfaces;
 using PomoControl.Service.ViewModels.Account;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PomoControl.API.Controllers
@@ -13,9 +14,13 @@ namespace PomoControl.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService)
+        private readonly IUserService _userService;
+        private readonly ITokenService _tokenService;
+        public AccountController(IAccountService accountService, IUserService userService, ITokenService tokenService)
         {
             _accountService = accountService;
+            _userService = userService;
+            _tokenService = tokenService;
         }
 
         [HttpPost]
@@ -44,5 +49,19 @@ namespace PomoControl.API.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
+        [HttpPut]
+        [Route("change-status/{status}")]
+        [Authorize]
+        public async Task<IActionResult> ChangeStatus(bool status)
+        {
+            var response = await _userService.ChangeStatus(new ChangeStatusViewModel()
+            {
+                Active = status, 
+                Email = _tokenService.GetEmail(HttpContext).Data
+            });
+            if (response.Success)
+                return StatusCode(200, response.Message);
+            return StatusCode(500, new { ErrorMessage= response.Message });
+        }
     }
 }

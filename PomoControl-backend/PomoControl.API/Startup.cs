@@ -61,6 +61,7 @@ namespace PomoControl.API
                 cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
                 cfg.CreateMap<SignInViewModel, User>().ReverseMap();
                 cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
+                cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
                 cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
                 cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
                 //cfg.CreateMap<User, UserDTO>().ReverseMap();

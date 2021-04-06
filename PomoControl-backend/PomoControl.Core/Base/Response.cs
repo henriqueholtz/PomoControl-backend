@@ -33,12 +33,17 @@ namespace PomoControl.Core
         public T Data { get; set; }
         public string Message { get; set; }
         public bool Success { get; set; }
-        public ResponseDTO(T data, List<string> sourceResponseTime = null) : base(sourceResponseTime)
+        public ResponseDTO(T data, string message, bool success, List<string> sourceResponseTime = null) : base(sourceResponseTime)
         {
+            Message = message;
+            Success = success;
             Data = data;
         }
-        public ResponseDTO(List<string> sourceResponseTime = null) : base(sourceResponseTime)
-        { }
+        public ResponseDTO(string message, bool success, List<string> sourceResponseTime = null) : base(sourceResponseTime)
+        {
+            Message = message;
+            Success = success;
+        }
         public ResponseDTO() : base()
         { }
 

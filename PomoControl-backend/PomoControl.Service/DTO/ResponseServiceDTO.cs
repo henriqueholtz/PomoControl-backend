@@ -1,15 +1,15 @@
 ﻿namespace PomoControl.Service.DTO
 {
-    public class ResponseDTO
+    public class ResponseServiceDTO
     {
         public int StatusCode { get; set; }
         public dynamic Data { get; set; }
         public string Message { get; set; }
         public bool Success { get; set; }
-        public ResponseDTO()
+        public ResponseServiceDTO()
         { }
 
-        public ResponseDTO(int statusCode, dynamic data, string message, bool success)
+        public ResponseServiceDTO(int statusCode, dynamic data, string message, bool success)
         {
             StatusCode = statusCode;
             Data = data;
@@ -18,7 +18,7 @@
         }
     }
 
-    public class ResonseWithTokenDTO : ResponseDTO
+    public class ResonseWithTokenDTO : ResponseServiceDTO
     {
         public string AccessToken { get; set; }
 

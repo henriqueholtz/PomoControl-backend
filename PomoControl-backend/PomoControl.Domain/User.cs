@@ -48,5 +48,10 @@ namespace PomoControl.Domain
 
             return true;
         }
+
+        public void ChangeStatus(bool active)
+        {
+            Active = active;
+        }
     }
 }
