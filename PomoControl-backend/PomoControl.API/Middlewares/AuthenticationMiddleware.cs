@@ -26,7 +26,7 @@ namespace PomoControl.API.Middlewares
             }
             catch(PomoControlException ex)
             {
-                Console.WriteLine();
+                throw; //Go to ExceptionMiddleware
             }
             await _next(context);
         }

@@ -199,6 +199,7 @@ namespace PomoControl.API
 
             app.UseRouting();
 
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthentication();
             app.UseMiddleware<AuthenticationMiddleware>();
             app.UseAuthorization();
