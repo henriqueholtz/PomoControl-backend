@@ -43,13 +43,13 @@ namespace PomoControl.Service.Services
                 }
                 return new ResponseServiceDTO(500, viewModel, $"An error ocurred: {response.Message}", false);
             }
-            catch (DomainException ex)
+            catch (PomoControlException ex)
             {
-                throw new DomainException(ex.Message, ex);
+                throw;
             }
             catch (Exception ex)
             {
-                throw new ServiceException("Ocurred an error on change status for this user! Try again later.", ex);
+                throw;
             }
         }
 

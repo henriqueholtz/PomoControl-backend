@@ -31,7 +31,7 @@ namespace PomoControl.Infraestructure.Repositories
             }
             catch(Exception ex)
             {
-                throw new RepositoryException(ex.Message, ex);
+                throw;
             }
         }
 

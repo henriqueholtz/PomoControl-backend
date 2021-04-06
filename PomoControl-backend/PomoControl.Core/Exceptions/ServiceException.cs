@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Net;
 
 namespace PomoControl.Core.Exceptions
 {
-    public class ServiceException : Exception
+    public class ServiceException : PomoControlException
     {
-        public ServiceException()
+        public ServiceException(string message = "An error ocurrer in Service.") : base(message, HttpStatusCode.InternalServerError)
         { }
-        public ServiceException(string message) : base(message)
-        { /* Gravar logs aqui */ }
-        public ServiceException(string message, Exception ex) : base(message, ex)
-        { /* Gravar logs aqui */ }
     }
 }

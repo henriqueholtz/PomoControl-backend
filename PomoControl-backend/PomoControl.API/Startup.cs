@@ -29,6 +29,7 @@ using PomoControl.Service.ViewModels.Account;
 using PomoControl.Service.ViewModels.Token;
 using EscNet.DependencyInjection.IoC.Cryptography;
 using PomoControl.Core.Helpers;
+using PomoControl.API.Middlewares;
 
 namespace PomoControl.API
 {
@@ -199,6 +200,7 @@ namespace PomoControl.API
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseMiddleware<AuthenticationMiddleware>();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

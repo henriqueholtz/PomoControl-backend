@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Net;
 
 namespace PomoControl.Core.Exceptions
 {
-    public class InvalidLoginException : Exception
+    public class InvalidLoginException : PomoControlException
     {
-        public InvalidLoginException(string message) : base(message)
+        public InvalidLoginException(string message = DefaultErrorMessages.DefaultErrorMessages.InvalidLogin) : base(message, HttpStatusCode.Unauthorized)
         {
             //Save Logs
         }
