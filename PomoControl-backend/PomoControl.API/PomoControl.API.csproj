@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <StartupObject>PomoControl.API.Program</StartupObject>
-    <UserSecretsId>243eb8ab-4a90-4c26-86c8-1956b09ab01c</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
