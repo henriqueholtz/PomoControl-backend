@@ -58,7 +58,6 @@ namespace PomoControl.API
             var autoMapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDTO>().ReverseMap();
-                //cfg.CreateMap<User, TokenViewModel>().ReverseMap();
                 cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
                 cfg.CreateMap<SignInViewModel, User>().ReverseMap();
                 cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
