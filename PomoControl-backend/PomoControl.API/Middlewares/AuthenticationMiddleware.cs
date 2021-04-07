@@ -18,16 +18,16 @@ namespace PomoControl.API.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            try
-            {
-                if (!context.User.Identity.IsAuthenticated)
-                    throw new InvalidTokenException();
+            //try
+            //{
+            //    //if (!context.User.Identity.IsAuthenticated)
+            //    //    throw new InvalidTokenException();
 
-            }
-            catch(PomoControlException ex)
-            {
-                throw; //Go to ExceptionMiddleware
-            }
+            //}
+            //catch(PomoControlException ex)
+            //{
+            //    throw; //Go to ExceptionMiddleware
+            //}
             await _next(context);
         }
     }
