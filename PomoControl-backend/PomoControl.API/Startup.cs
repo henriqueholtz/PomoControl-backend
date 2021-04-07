@@ -127,15 +127,15 @@ namespace PomoControl.API
 
 
             #region DataBase connection
-            services.AddDbContext<PomoContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                    retry => retry.EnableRetryOnFailure(
-                            maxRetryCount: 2,
-                            maxRetryDelay: TimeSpan.FromSeconds(6),
-                            errorNumbersToAdd: null
-                        ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
-            }, ServiceLifetime.Transient); //It starts a instance per use
+            //services.AddDbContext<PomoContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+            //        retry => retry.EnableRetryOnFailure(
+            //                maxRetryCount: 2,
+            //                maxRetryDelay: TimeSpan.FromSeconds(6),
+            //                errorNumbersToAdd: null
+            //            ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
+            //}, ServiceLifetime.Transient); //It starts a instance per use
             #endregion
 
             #region Swagger
