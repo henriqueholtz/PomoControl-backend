@@ -51,7 +51,7 @@ namespace PomoControl.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            //services.AddMvc();
             services.AddControllers();
 
             #region AutoMapper and your DI
@@ -73,7 +73,7 @@ namespace PomoControl.API
 
             #region Dependency Injection
             services.AddHttpClient();
-            services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
+            //services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
             services.AddSingleton<CryptographyHelper>();
             services.AddSingleton(d => Configuration);
 
