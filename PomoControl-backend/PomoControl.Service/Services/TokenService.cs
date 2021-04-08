@@ -102,7 +102,7 @@ namespace PomoControl.Service.Services
         {
             //var allClaims = GetClaimsUser(context);
             //var claimCode = allClaims.FirstOrDefault(x => x.Type.Equals("Code"));
-            int code = 0;
+            //int code = 0;
             //if (claimCode == null || !Int32.TryParse(claimCode.Value, out code))
                 return new ResponseDTO<int>(0, "", false);
             //return new ResponseDTO<int>(code, "", true);

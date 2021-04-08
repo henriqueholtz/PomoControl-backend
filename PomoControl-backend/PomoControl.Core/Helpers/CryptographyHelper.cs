@@ -17,7 +17,7 @@ namespace PomoControl.Core.Helpers
             {
                 return _rijndaelCryptography.Encrypt(text);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw; //Create a CryptographyException
             }
@@ -28,7 +28,7 @@ namespace PomoControl.Core.Helpers
             {
                 return _rijndaelCryptography.Decrypt(text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw; //Create a CryptographyException
             }

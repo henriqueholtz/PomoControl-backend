@@ -43,11 +43,11 @@ namespace PomoControl.Service.Services
                 }
                 return new ResponseServiceDTO(500, viewModel, $"An error ocurred: {response.Message}", false);
             }
-            catch (PomoControlException ex)
+            catch (PomoControlException)
             {
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

@@ -29,7 +29,7 @@ namespace PomoControl.Infraestructure.Repositories
                 await _context.SaveChangesAsync();
                 return new ResponseDTO<User>(user, "The status is updated with success.", true); //Add record time here
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw;
             }

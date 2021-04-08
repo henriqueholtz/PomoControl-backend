@@ -57,11 +57,11 @@ namespace PomoControl.Infraestructure.Repositories
 
                 return entity;
             }
-            catch (RepositoryException ex)
+            catch (RepositoryException)
             {
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
