@@ -25,7 +25,7 @@ namespace PomoControl.API.Controllers
 
         [HttpPost]
         [Route("post")]
-        [ClaimsAuthorize("Code", "2")]
+        //[ClaimsAuthorize("Code", "2")]
         [Authorize]
         //[AllowAnonymous]
         public string GetAuthorizePost() => "Authorize POST!!";
