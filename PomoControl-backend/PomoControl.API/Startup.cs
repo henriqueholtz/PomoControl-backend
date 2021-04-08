@@ -55,38 +55,38 @@ namespace PomoControl.API
             services.AddControllers();
 
             #region AutoMapper and your DI
-            var autoMapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<User, UserDTO>().ReverseMap();
-                cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
-                cfg.CreateMap<SignInViewModel, User>().ReverseMap();
-                cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
-                cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
-                cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
-                cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
-                //cfg.CreateMap<User, UserDTO>().ReverseMap();
-            });
+            //var autoMapperConfig = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<User, UserDTO>().ReverseMap();
+            //    cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
+            //    cfg.CreateMap<SignInViewModel, User>().ReverseMap();
+            //    cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
+            //    cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
+            //    cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
+            //    cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
+            //    //cfg.CreateMap<User, UserDTO>().ReverseMap();
+            //});
 
-            services.AddSingleton(autoMapperConfig.CreateMapper());
+            //services.AddSingleton(autoMapperConfig.CreateMapper());
 
             #endregion
 
             #region Dependency Injection
-            services.AddHttpClient();
+            //services.AddHttpClient();
             //services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
-            services.AddSingleton<CryptographyHelper>();
-            services.AddSingleton(d => Configuration);
+            //services.AddSingleton<CryptographyHelper>();
+            //services.AddSingleton(d => Configuration);
 
             //services.AddTransient<>(); //It starts a instance per use
             //services.AddSingleton<>(); // It starts a single instance per application
-            services.AddScoped<IUserService, UserService>(); //It starts a single instance per request
-            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IUserService, UserService>(); //It starts a single instance per request
+            //services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddScoped<IScopeService, ScopeService>();
-            services.AddScoped<IScopeRepository, ScopeRepository>();
+            //services.AddScoped<IScopeService, ScopeService>();
+            //services.AddScoped<IScopeRepository, ScopeRepository>();
 
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddScoped<ITokenService, TokenService>();
+            //services.AddTransient<IAccountService, AccountService>();
+            //services.AddScoped<ITokenService, TokenService>();
             //services.AddScoped<IAccountRepository, AccountRepository>();
 
             //services.AddScoped<IScopeItemService, ScopeItemService>();
