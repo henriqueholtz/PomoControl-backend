@@ -73,56 +73,56 @@ namespace PomoControl.API
             #endregion
 
             #region Dependency Injection
-            services.AddHttpClient();
-            services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
-            services.AddSingleton<CryptographyHelper>();
-            services.AddSingleton(d => Configuration);
+            //services.AddHttpClient();
+            //services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
+            //services.AddSingleton<CryptographyHelper>();
+            //services.AddSingleton(d => Configuration);
 
             //services.AddTransient<>(); //It starts a instance per use
             //services.AddSingleton<>(); // It starts a single instance per application
-            services.AddScoped<IUserService, UserService>(); //It starts a single instance per request
-            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IUserService, UserService>(); //It starts a single instance per request
+            //services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddScoped<IScopeService, ScopeService>();
-            services.AddScoped<IScopeRepository, ScopeRepository>();
+            //services.AddScoped<IScopeService, ScopeService>();
+            //services.AddScoped<IScopeRepository, ScopeRepository>();
 
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddScoped<ITokenService, TokenService>();
+            //services.AddTransient<IAccountService, AccountService>();
+            //services.AddScoped<ITokenService, TokenService>();
             //services.AddScoped<IAccountRepository, AccountRepository>();
 
             //services.AddScoped<IScopeItemService, ScopeItemService>();
             #endregion
 
             #region JWT
-            var secretKey = Configuration["Jwt:SecretKey"];
-            var key = Encoding.ASCII.GetBytes(secretKey);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => 
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    //ValidateIssuer = false,
-                    ValidateIssuer = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
-                    //ValidateAudience = false,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["Jwt:Audience"],
-                    //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
-                };
-            })/*.AddGoogle(x =>
-            {
-                x.ClientId = "779353502918-khhi4aa617b0ucnq95ee7tg3r8iltubd.apps.googleusercontent.com";
-                x.ClientSecret = "DVZv27Ie6qZIQpUk7trq3gKl";
-                x.Validate();
-            })*/;
+            //var secretKey = Configuration["Jwt:SecretKey"];
+            //var key = Encoding.ASCII.GetBytes(secretKey);
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(x => 
+            //{
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = true;
+            //    x.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        //ValidateIssuer = false,
+            //        ValidateIssuer = true,
+            //        ValidIssuer = Configuration["Jwt:Issuer"],
+            //        //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
+            //        //ValidateAudience = false,
+            //        ValidateAudience = true,
+            //        ValidAudience = Configuration["Jwt:Audience"],
+            //        //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
+            //    };
+            //})/*.AddGoogle(x =>
+            //{
+            //    x.ClientId = "779353502918-khhi4aa617b0ucnq95ee7tg3r8iltubd.apps.googleusercontent.com";
+            //    x.ClientSecret = "DVZv27Ie6qZIQpUk7trq3gKl";
+            //    x.Validate();
+            //})*/;
             #endregion
 
 
@@ -199,9 +199,9 @@ namespace PomoControl.API
 
             app.UseRouting();
 
-            app.UseMiddleware<ExceptionMiddleware>();
+            //app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthentication();
-            app.UseMiddleware<AuthenticationMiddleware>();
+            //app.UseMiddleware<AuthenticationMiddleware>();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
