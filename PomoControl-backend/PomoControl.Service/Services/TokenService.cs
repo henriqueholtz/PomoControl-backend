@@ -12,7 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using static PomoControl.Service.CustomAuthorization;
+//using static PomoControl.Service.CustomAuthorization;
 
 namespace PomoControl.Service.Services
 {
@@ -66,25 +66,25 @@ namespace PomoControl.Service.Services
 
         public ResponseDTO<TokenClaimsDTO> GetTokenClaims(HttpContext context, bool itemsIgnore = true)
         {
-            var claims = GetClaimsUser(context, itemsIgnore);
+            //var claims = GetClaimsUser(context, itemsIgnore);
             TokenClaimsDTO tokenClaimsDTO = new TokenClaimsDTO();
-            foreach(var claim in claims)
-            {
-                switch(claim.Type.ToLower())
-                {
-                    case "code":
-                        tokenClaimsDTO.Code = Convert.ToInt32(claim.Value);
-                        break;
+            //foreach(var claim in claims)
+            //{
+            //    switch(claim.Type.ToLower())
+            //    {
+            //        case "code":
+            //            tokenClaimsDTO.Code = Convert.ToInt32(claim.Value);
+            //            break;
 
-                    case "name":
-                        tokenClaimsDTO.Name = claim.Value;
-                        break;
+            //        case "name":
+            //            tokenClaimsDTO.Name = claim.Value;
+            //            break;
 
-                    case "emailaddress":
-                        tokenClaimsDTO.Email = claim.Value;
-                        break;
-                }
-            }
+            //        case "emailaddress":
+            //            tokenClaimsDTO.Email = claim.Value;
+            //            break;
+            //    }
+            //}
             return new ResponseDTO<TokenClaimsDTO>(tokenClaimsDTO, "", true);
         }
 
@@ -93,28 +93,28 @@ namespace PomoControl.Service.Services
             if (!claims.Any())
                 return null;
 
-            var allClaims = GetClaimsUser(context, true);
-            var result = (from x in allClaims join y in claims on x.Type.ToLower() equals y.ToLower() select x).ToList();
-            return new ResponseDTO<dynamic>(result, "", true);
+            //var allClaims = GetClaimsUser(context, true);
+            //var result = (from x in allClaims join y in claims on x.Type.ToLower() equals y.ToLower() select x).ToList();
+            return new ResponseDTO<dynamic>(new { }, "", true);
         }
 
         public ResponseDTO<int> GetCode(HttpContext context)
         {
-            var allClaims = GetClaimsUser(context);
-            var claimCode = allClaims.FirstOrDefault(x => x.Type.Equals("Code"));
+            //var allClaims = GetClaimsUser(context);
+            //var claimCode = allClaims.FirstOrDefault(x => x.Type.Equals("Code"));
             int code = 0;
-            if (claimCode == null || !Int32.TryParse(claimCode.Value, out code))
+            //if (claimCode == null || !Int32.TryParse(claimCode.Value, out code))
                 return new ResponseDTO<int>(0, "", false);
-            return new ResponseDTO<int>(code, "", true);
+            //return new ResponseDTO<int>(code, "", true);
         }
 
         public ResponseDTO<string> GetEmail(HttpContext context)
         {
-            var allClaims = GetClaimsUser(context);
-            var claimEmail = allClaims.FirstOrDefault(x => x.Type.Equals("emailaddress"));
-            if (claimEmail == null || String.IsNullOrWhiteSpace(claimEmail.Value))
+            //var allClaims = GetClaimsUser(context);
+            //var claimEmail = allClaims.FirstOrDefault(x => x.Type.Equals("emailaddress"));
+            //if (claimEmail == null || String.IsNullOrWhiteSpace(claimEmail.Value))
                 return new ResponseDTO<string>("", false);
-            return new ResponseDTO<string>(claimEmail.Value, "", true);
+            //return new ResponseDTO<string>(claimEmail.Value, "", true);
         }
     }
 }
