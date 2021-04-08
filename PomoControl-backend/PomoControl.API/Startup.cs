@@ -93,48 +93,48 @@ namespace PomoControl.API
             #endregion
 
             #region JWT
-            var secretKey = Configuration["Jwt:SecretKey"];
-            var key = Encoding.ASCII.GetBytes(secretKey);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => 
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    //ValidateIssuer = false,
-                    ValidateIssuer = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
-                    //ValidateAudience = false,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["Jwt:Audience"],
-                    //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
-                };
-            })/*.AddGoogle(x =>
-            {
-                x.ClientId = "779353502918-khhi4aa617b0ucnq95ee7tg3r8iltubd.apps.googleusercontent.com";
-                x.ClientSecret = "DVZv27Ie6qZIQpUk7trq3gKl";
-                x.Validate();
-            })*/;
+            //var secretKey = Configuration["Jwt:SecretKey"];
+            //var key = Encoding.ASCII.GetBytes(secretKey);
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(x => 
+            //{
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = true;
+            //    x.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        //ValidateIssuer = false,
+            //        ValidateIssuer = true,
+            //        ValidIssuer = Configuration["Jwt:Issuer"],
+            //        //ValidIssuers = new List<string>() { "JwtGenerator", "accounts.google.com" },
+            //        //ValidateAudience = false,
+            //        ValidateAudience = true,
+            //        ValidAudience = Configuration["Jwt:Audience"],
+            //        //ValidAudiences = new List<string>() { "Snd0R2VuZXJhdG9y", "779353502918-02hl7fnucja6m6eec21r82l6st4lh55v.apps.googleusercontent.com" },
+            //    };
+            //})/*.AddGoogle(x =>
+            //{
+            //    x.ClientId = "779353502918-khhi4aa617b0ucnq95ee7tg3r8iltubd.apps.googleusercontent.com";
+            //    x.ClientSecret = "DVZv27Ie6qZIQpUk7trq3gKl";
+            //    x.Validate();
+            //})*/;
             #endregion
 
 
             #region DataBase connection
-            services.AddDbContext<PomoContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                    retry => retry.EnableRetryOnFailure(
-                            maxRetryCount: 2,
-                            maxRetryDelay: TimeSpan.FromSeconds(6),
-                            errorNumbersToAdd: null
-                        ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
-            }, ServiceLifetime.Transient); //It starts a instance per use
+            //services.AddDbContext<PomoContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+            //        retry => retry.EnableRetryOnFailure(
+            //                maxRetryCount: 2,
+            //                maxRetryDelay: TimeSpan.FromSeconds(6),
+            //                errorNumbersToAdd: null
+            //            ).MigrationsHistoryTable("EFCore_History")); //appsettings.json
+            //}, ServiceLifetime.Transient); //It starts a instance per use
             #endregion
 
             #region Swagger
@@ -198,10 +198,10 @@ namespace PomoControl.API
 
             app.UseRouting();
 
-            app.UseMiddleware<ExceptionMiddleware>();
-            app.UseAuthentication();
-            app.UseMiddleware<AuthenticationMiddleware>();
-            app.UseAuthorization();
+            //app.UseMiddleware<ExceptionMiddleware>();
+            //app.UseAuthentication();
+            //app.UseMiddleware<AuthenticationMiddleware>();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
