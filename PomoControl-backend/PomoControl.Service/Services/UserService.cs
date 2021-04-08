@@ -53,7 +53,7 @@ namespace PomoControl.Service.Services
             }
         }
 
-        public async Task<UserDTO> Create(CreateUserViewModel userViewModel)
+        public /*async*/ Task<UserDTO> Create(CreateUserViewModel userViewModel)
         {
             //try
             //{

@@ -19,27 +19,27 @@ namespace PomoControl.Service.Services
             _scopeRepository = scopeRepository;
         }
 
-        public async Task<ResponseServiceDTO> Create(ScopeDTO scopeDTO)
+        public /*async*/ Task<ResponseServiceDTO> Create(ScopeDTO scopeDTO)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseServiceDTO> Get(int code)
+        public /*async*/ Task<ResponseServiceDTO> Get(int code)
         {
             throw new NotImplementedException();
         }
 
-        public async Task Remove(int code)
+        public /*async*/ Task Remove(int code)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<ResponseServiceDTO>> SearchByName(string name)
+        public /*async*/ Task<List<ResponseServiceDTO>> SearchByName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseServiceDTO> Update(ScopeDTO scopeDTO)
+        public /*async*/ Task<ResponseServiceDTO> Update(ScopeDTO scopeDTO)
         {
             throw new NotImplementedException();
         }
