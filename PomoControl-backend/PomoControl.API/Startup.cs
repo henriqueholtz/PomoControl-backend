@@ -35,40 +35,40 @@ namespace PomoControl.API
 {
     public class Startup
     {
-        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public Startup(/*Microsoft.AspNetCore.Hosting.IHostingEnvironment env*/IConfiguration configuration)
         {
-            //Configuration = configuration;
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(env.ContentRootPath)
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+            //    .AddEnvironmentVariables();
+            //Configuration = builder.Build();
         }
-        //public IConfiguration Configuration { get; }
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
+        //public IConfigurationRoot Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            //services.AddMvc();
             services.AddControllers();
 
             #region AutoMapper and your DI
-            var autoMapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<User, UserDTO>().ReverseMap();
-                //cfg.CreateMap<User, TokenViewModel>().ReverseMap();
-                cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
-                cfg.CreateMap<SignInViewModel, User>().ReverseMap();
-                cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
-                cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
-                cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
-                cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
-                //cfg.CreateMap<User, UserDTO>().ReverseMap();
-            });
+            //var autoMapperConfig = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<User, UserDTO>().ReverseMap();
+            //    //cfg.CreateMap<User, TokenViewModel>().ReverseMap();
+            //    cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
+            //    cfg.CreateMap<SignInViewModel, User>().ReverseMap();
+            //    cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
+            //    cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
+            //    cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
+            //    cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
+            //    //cfg.CreateMap<User, UserDTO>().ReverseMap();
+            //});
 
-            services.AddSingleton(autoMapperConfig.CreateMapper());
+            //services.AddSingleton(autoMapperConfig.CreateMapper());
 
             #endregion
 
@@ -200,9 +200,9 @@ namespace PomoControl.API
             app.UseRouting();
 
             //app.UseMiddleware<ExceptionMiddleware>();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             //app.UseMiddleware<AuthenticationMiddleware>();
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

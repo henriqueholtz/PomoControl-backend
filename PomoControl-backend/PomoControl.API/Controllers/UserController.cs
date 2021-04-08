@@ -13,21 +13,22 @@ namespace PomoControl.API.Controllers
     {
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([FromBody] CreateUserViewModel user)
+        public /*async*/ Task<IActionResult> Create([FromBody] CreateUserViewModel user)
         {
-            try
-            {
+            //try
+            //{
                 //var response
-                return StatusCode(501, user);
-            }
-            catch (DomainException ex)
-            {
-                return BadRequest(ex);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+                //return StatusCode(501, user);
+                throw new NotImplementedException();
+            //}
+            //catch (DomainException)
+            //{
+            //    //return BadRequest(ex);
+            //}
+            //catch (Exception)
+            //{
+            //    //return BadRequest(ex);
+            //}
         }
     }
 }
