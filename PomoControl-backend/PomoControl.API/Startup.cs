@@ -55,19 +55,19 @@ namespace PomoControl.API
             services.AddControllers();
 
             #region AutoMapper and your DI
-            //var autoMapperConfig = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.CreateMap<User, UserDTO>().ReverseMap();
-            //    cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
-            //    cfg.CreateMap<SignInViewModel, User>().ReverseMap();
-            //    cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
-            //    cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
-            //    cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
-            //    cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
-            //    //cfg.CreateMap<User, UserDTO>().ReverseMap();
-            //});
+            var autoMapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<User, UserDTO>().ReverseMap();
+                cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
+                cfg.CreateMap<SignInViewModel, User>().ReverseMap();
+                cfg.CreateMap<SignUpViewModel, User>().ReverseMap();
+                cfg.CreateMap<UserSimpleDTO, User>().ReverseMap();
+                cfg.CreateMap<SignInViewModel, AccountDTO>().ReverseMap();
+                cfg.CreateMap<SignUpViewModel, AccountDTO>().ReverseMap();
+                //cfg.CreateMap<User, UserDTO>().ReverseMap();
+            });
 
-            //services.AddSingleton(autoMapperConfig.CreateMapper());
+            services.AddSingleton(autoMapperConfig.CreateMapper());
 
             #endregion
 
