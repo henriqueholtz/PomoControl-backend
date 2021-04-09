@@ -1,1 +1,1 @@
-web: ASPNETCORE_URLS="http://*:$PORT" dotnet PomoControl.API.dll
+web:dotnet ./PomoControl-backendPomoControl.API
