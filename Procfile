@@ -1,1 +1,1 @@
-web:dotnet ./PomoControl-backendPomoControl.API
+web:dotnet ./PomoControl-backend/PomoControl.API
