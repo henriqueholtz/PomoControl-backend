@@ -75,7 +75,7 @@ namespace PomoControl.API
             services.AddHttpClient();
             //services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
             //services.AddSingleton<CryptographyHelper>();
-            services.AddSingleton(d => Configuration);
+            //services.AddSingleton(d => Configuration);
 
             //services.AddTransient<>(); //It starts a instance per use
             //services.AddSingleton<>(); // It starts a single instance per application
