@@ -1,1 +1,1 @@
-web: cd $HOME/heroku_output && ./PomoControl.API
+web: dotnet ./PomoControl-backendPomoControl.API
