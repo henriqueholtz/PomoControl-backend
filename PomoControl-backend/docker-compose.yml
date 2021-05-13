@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+    pomocontrolapi:
+        container_name: pomocontrolapi
+        image: pomocontrolapi
+        ports:
+            - "50709:80"
+        build:
+            context: .
+            dockerfile: PomoControl.API/Dockerfile
