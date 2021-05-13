@@ -42,7 +42,7 @@ namespace PomoControl.Service.Services
                 if(!userExists.Active)
                     return new ResonseWithTokenDTO(401, viewModel.Email, "", "This user don't is active.", false);
 
-                if (!userExists.Password.Equals(_cryptographyHelper.Encrypt(viewModel.Password)))
+                if (!userExists.Password.Equals(_cryptographyHelper.Encrypt(viewModel.Password.ToBase64())))
                     return new ResonseWithTokenDTO(401, viewModel.Email, "", DefaultErrorMessages.InvalidLogin, false);
 
                 var response = _tokenService.GenerateToken(new TokenViewModel(userExists));
