@@ -73,7 +73,7 @@ namespace PomoControl.API
 
             #region Dependency Injection
             services.AddHttpClient();
-            services.AddRijndaelCryptography(Configuration["Cryptography:Key"]);
+            services.AddRijndaelCryptography("x5qWaAZU3jqSY6WV");
             services.AddSingleton<CryptographyHelper>();
             services.AddSingleton(d => Configuration);
 
@@ -93,7 +93,7 @@ namespace PomoControl.API
             #endregion
 
             #region JWT
-            var secretKey = Configuration["Jwt:SecretKey"];
+            var secretKey = "x5qWaAZU3jqSY6WVSecret";
             var key = Encoding.ASCII.GetBytes(secretKey);
             services.AddAuthentication(x =>
             {
@@ -128,7 +128,8 @@ namespace PomoControl.API
             #region DataBase connection
             services.AddDbContext<PomoContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                options.UseSqlServer("Server=172.23.0.2,1433;Database=PomoControl;User=SA;Password=pixe2008;",
                     retry => retry.EnableRetryOnFailure(
                             maxRetryCount: 2,
                             maxRetryDelay: TimeSpan.FromSeconds(6),

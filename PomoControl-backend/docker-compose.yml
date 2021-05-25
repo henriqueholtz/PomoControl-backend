@@ -1,36 +1,36 @@
-version: '3.4'
+version: "3.4"
 
 services:
     pomocontrolapi:
         container_name: pomocontrolapi
         image: pomocontrolapi
+        environment:
+          - PORT=5000
         ports:
-            - "50709:80"
+            - "5000:5000"
         build:
             context: .
             dockerfile: PomoControl.API/Dockerfile
-        depends_on: 
-            - db
-        networks:
-            - pomocontrolnetwork
-     
-    db:
-        image: microsoft/mssql-server-linux:2017-latest
-        restart: always
-        environment: 
-            SA_PASSWORD: pixe2008
-            ACCEPT_EULA: 'Y'
-        ports:
-            - '1433:1433'
-        expose:
-            - '1433'
-        container_name: pomocontrol-sql-server
-        networks:
-            - pomocontrolnetwork
-
-        
-networks:
-    pomocontrolnetwork:
-        driver: bridge
-
- 
+    #         depends_on: 
+    #             - db
+    #         networks:
+    #             - pomocontrolnetwork
+         
+    #     db:
+    #         image: microsoft/mssql-server-linux:2017-latest
+    #         restart: always
+    #         environment: 
+    #             SA_PASSWORD: pixe2008
+    #             ACCEPT_EULA: 'Y'
+    #         ports:
+    #             - '1433:1433'
+    #         expose:
+    #             - '1433'
+    #         container_name: pomocontrol-sql-server
+    #         networks:
+    #             - pomocontrolnetwork
+    
+            
+    # networks:
+    #     pomocontrolnetwork:
+    #         driver: bridge
