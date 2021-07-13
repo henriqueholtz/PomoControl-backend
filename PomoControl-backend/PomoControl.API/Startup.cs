@@ -35,6 +35,7 @@ namespace PomoControl.API
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(/*Microsoft.AspNetCore.Hosting.IHostingEnvironment env */IConfiguration configuration)
         {
             Configuration = configuration;
@@ -51,6 +52,24 @@ namespace PomoControl.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Set CORS policy
+            services.AddCors(options =>
+            { 
+                //https://docs.microsoft.com/pt-br/aspnet/core/security/cors?view=aspnetcore-5.0
+                options.AddPolicy(name: MyAllowSpecificOrigins, 
+                    builder => 
+                    {
+                        builder.WithOrigins("http://localhost:3000");
+                    });
+
+                //Asgard example 
+                // options.AddPolicy("default", policy =>
+                // {
+                //     policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                // });
+            });
+            #endregion
+            
             services.AddMvc();
             services.AddControllers();
 
@@ -123,7 +142,6 @@ namespace PomoControl.API
                 x.Validate();
             })*/;
             #endregion
-
 
             #region DataBase connection
             services.AddDbContext<PomoContext>(options =>
@@ -198,6 +216,7 @@ namespace PomoControl.API
             }
 
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthentication();
