@@ -12,7 +12,8 @@ namespace PomoControl.API.Controllers
         [AllowAnonymous]
         public IEnumerable<string> GET()
         {
-            return new string[] { "PomoControl - API", "Created in 02/21", "by: Henrique Holtz" };
+            string str = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+            return new string[] { "PomoControl - API", "Created in 02/21", "by: Henrique Holtz", str };
         }
 
     }
