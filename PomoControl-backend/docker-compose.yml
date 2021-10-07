@@ -10,7 +10,7 @@ services:
             - "5000:5000"
         build:
             context: .
-            dockerfile: PomoControl.API/Dockerfile
+            dockerfile: Dockerfile
     #         depends_on: 
     #             - db
     #         networks:
